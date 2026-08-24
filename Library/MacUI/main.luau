@@ -397,7 +397,7 @@ function MacLib:Window(Settings)
 	local divider = Instance.new("Frame")
 	divider.Name = "Divider"
 	divider.AnchorPoint = Vector2.new(1, 0)
-	divider.BackgroundColor3 = Color3.fromRGB(90, 80, 115)
+	divider.BackgroundColor3 = Color3.fromRGB(34, 40, 49)
 	divider.BackgroundTransparency = 0.85
 	divider.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	divider.BorderSizePixel = 0
@@ -410,7 +410,7 @@ function MacLib:Window(Settings)
 	dividerInteract.AnchorPoint = Vector2.new(0.5, 0)
 	dividerInteract.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	dividerInteract.BackgroundTransparency = 1
-	dividerInteract.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	dividerInteract.BorderColor3 = Color3.fromRGB(199, 196, 196)
 	dividerInteract.BorderSizePixel = 0
 	dividerInteract.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
 	dividerInteract.Position = UDim2.fromScale(0.5, 0)
