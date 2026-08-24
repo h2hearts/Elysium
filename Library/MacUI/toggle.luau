@@ -86,10 +86,10 @@ local function __create_gui(parent: Instance): ScreenGui
     toggle_btn.TextSize               = 14
     toggle_btn.ZIndex                 = 9999999
 
-    --@drag_system
     local dragging  : boolean  = false
     local drag_start: Vector3? = nil
     local start_pos : UDim2?   = nil
+    local drag_conn : RBXScriptConnection? = nil
 
     local function __update_drag(input: InputObject): ()
         if not drag_start or not start_pos then return end
@@ -102,23 +102,6 @@ local function __create_gui(parent: Instance): ScreenGui
         )
     end
 
-    local function __begin_drag(input: InputObject): ()
-        if input.UserInputType == Enum.UserInputType.MouseButton1
-        or input.UserInputType == Enum.UserInputType.Touch then
-            dragging   = true
-            drag_start = input.Position
-            start_pos  = main_frame.Position
-
-            local conn
-            conn = input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                    conn:Disconnect()
-                end
-            end)
-        end
-    end
-
     local function __on_drag(input: InputObject): ()
         if not dragging then return end
         if input.UserInputType == Enum.UserInputType.MouseMovement
@@ -127,12 +110,33 @@ local function __create_gui(parent: Instance): ScreenGui
         end
     end
 
+    local function __begin_drag(input: InputObject): ()
+        if input.UserInputType == Enum.UserInputType.MouseButton1
+        or input.UserInputType == Enum.UserInputType.Touch then
+            dragging   = true
+            drag_start = input.Position
+            start_pos  = main_frame.Position
+
+            if drag_conn then drag_conn:Disconnect() end
+            drag_conn = user_input.InputChanged:Connect(__on_drag)
+
+            local conn
+            conn = input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                    if drag_conn then
+                        drag_conn:Disconnect()
+                        drag_conn = nil
+                    end
+                    conn:Disconnect()
+                end
+            end)
+        end
+    end
+
     --@drag_connections
     main_frame.InputBegan:Connect(__begin_drag)
-    main_frame.InputChanged:Connect(__on_drag)
     toggle_btn.InputBegan:Connect(__begin_drag)
-    toggle_btn.InputChanged:Connect(__on_drag)
-    user_input.InputChanged:Connect(__on_drag)
 
     return screen_gui
 end
