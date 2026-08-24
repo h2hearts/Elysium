@@ -1,3 +1,6 @@
+--!nocheck
+--!nolint
+
 local cloneref = cloneref or function(x) return x end
 
 --@services
@@ -12,7 +15,7 @@ type interface_type = {
 }
 
 --@constants
-local GUI_NAME : string = "Ajomok UI"
+local GUI_NAME : string = "Elysium UI"
 local ICON_ID  : string = "rbxassetid://104695336294005"
 
 --@gui_builder
@@ -31,18 +34,19 @@ local function __create_gui(parent: Instance): ScreenGui
     main_frame.AnchorPoint      = Vector2.new(0, 0.5)
     main_frame.Position         = UDim2.new(0, 5, 0.5, 0)
     main_frame.Size             = UDim2.new(0, 55, 0, 55)
-    main_frame.BackgroundColor3 = Color3.new(1, 1, 1)
+    main_frame.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
+    main_frame.BackgroundTransparency = 0.08
     main_frame.BorderSizePixel  = 0
     main_frame.Active           = true
     main_frame.Draggable        = false
 
     --@gradient
     local ui_gradient        = Instance.new("UIGradient", main_frame)
-    ui_gradient.Rotation     = 50
+    ui_gradient.Rotation     = 135
     ui_gradient.Color        = ColorSequence.new({
-        ColorSequenceKeypoint.new(0,        Color3.new(0.643137, 0.615686, 1)),
-        ColorSequenceKeypoint.new(0.515913, Color3.new(0.117647, 0.105882, 0.14902)),
-        ColorSequenceKeypoint.new(1,        Color3.new(0.643137, 0.615686, 1)),
+        ColorSequenceKeypoint.new(0,        Color3.fromRGB(75, 53, 128)),
+        ColorSequenceKeypoint.new(0.5,      Color3.fromRGB(35, 33, 44)),
+        ColorSequenceKeypoint.new(1,        Color3.fromRGB(24, 22, 30)),
     })
 
     --@corner
@@ -51,15 +55,16 @@ local function __create_gui(parent: Instance): ScreenGui
 
     --@stroke
     local ui_stroke          = Instance.new("UIStroke", main_frame)
-    ui_stroke.Color          = Color3.new(1, 1, 1)
-    ui_stroke.Thickness      = 2
+    ui_stroke.Color          = Color3.fromRGB(159, 122, 234)
+    ui_stroke.Thickness      = 1.5
+    ui_stroke.Transparency   = 0.5
 
     --@stroke_gradient
     local stroke_gradient    = Instance.new("UIGradient", ui_stroke)
-    stroke_gradient.Rotation = 90
+    stroke_gradient.Rotation = 135
     stroke_gradient.Color    = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.new(0.286275, 0.415686, 1)),
-        ColorSequenceKeypoint.new(1, Color3.new(0.137255, 0.137255, 0.137255)),
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(196, 181, 253)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(75, 53, 128)),
     })
 
     --@icon
