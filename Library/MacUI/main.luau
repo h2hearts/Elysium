@@ -206,7 +206,17 @@ function MacLib:Window(Settings)
 			acrylicPart.CFrame = CFrame.new(pCenter, pCenter + cameraCF.LookVector)
 		end
 
-		acrylicRenderConn = RunService.RenderStepped:Connect(updatePosition)
+		local lastPos, lastSize, lastCamCF
+		local function updatePositionCached()
+			local camera = workspace.CurrentCamera
+			if not camera or not base then return end
+			local absPos, absSize, camCF = base.AbsolutePosition, base.AbsoluteSize, camera.CFrame
+			if lastPos == absPos and lastSize == absSize and lastCamCF == camCF then return end
+			lastPos, lastSize, lastCamCF = absPos, absSize, camCF
+			updatePosition()
+		end
+
+		acrylicRenderConn = RunService.RenderStepped:Connect(updatePositionCached)
 	end
 
 	local base = Instance.new("Frame")
@@ -941,31 +951,38 @@ function MacLib:Window(Settings)
 		ChangeState("Idle")
 	end)
 
+	local resizeContentConn
+
 	dividerInteract.MouseButton1Down:Connect(function()
 		resizingContent = true
 		initialMouseX = UserInputService:GetMouseLocation().X
 		initialSidebarWidth = sidebar.AbsoluteSize.X
+
+		if resizeContentConn then resizeContentConn:Disconnect() end
+		resizeContentConn = UserInputService.InputChanged:Connect(function(input)
+			if resizingContent and input.UserInputType == Enum.UserInputType.MouseMovement then
+				local deltaX = UserInputService:GetMouseLocation().X - initialMouseX
+				local newSidebarWidth = initialSidebarWidth + deltaX
+
+				if math.abs(newSidebarWidth - defaultSidebarWidth) < snapRange then
+					newSidebarWidth = defaultSidebarWidth
+				else
+					newSidebarWidth = math.clamp(newSidebarWidth, minSidebarWidth, maxSidebarWidth)
+				end
+
+				sidebar.Size = UDim2.new(0, newSidebarWidth, 1, 0)
+				content.Size = UDim2.new(0, base.AbsoluteSize.X - newSidebarWidth, 1, 0)
+			end
+		end)
 	end)
 
 	UserInputService.InputEnded:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 then
 			resizingContent = false
-		end
-	end)
-
-	UserInputService.InputChanged:Connect(function(input)
-		if resizingContent and input.UserInputType == Enum.UserInputType.MouseMovement then
-			local deltaX = UserInputService:GetMouseLocation().X - initialMouseX
-			local newSidebarWidth = initialSidebarWidth + deltaX
-
-			if math.abs(newSidebarWidth - defaultSidebarWidth) < snapRange then
-				newSidebarWidth = defaultSidebarWidth
-			else
-				newSidebarWidth = math.clamp(newSidebarWidth, minSidebarWidth, maxSidebarWidth)
+			if resizeContentConn then
+				resizeContentConn:Disconnect()
+				resizeContentConn = nil
 			end
-
-			sidebar.Size = UDim2.new(0, newSidebarWidth, 1, 0)
-			content.Size = UDim2.new(0, base.AbsoluteSize.X - newSidebarWidth, 1, 0)
 		end
 	end)
 
@@ -1051,9 +1068,9 @@ function MacLib:Window(Settings)
 	end)
 
 	local dragging_ = false
-	local dragInput
 	local dragStart
 	local startPos
+	local dragConn
 
 	local function update(input)
 		local delta = input.Position - dragStart
@@ -1066,80 +1083,31 @@ function MacLib:Window(Settings)
 			dragStart = input.Position
 			startPos = base.Position
 
-			input.Changed:Connect(function()
+			if dragConn then dragConn:Disconnect() end
+			dragConn = UserInputService.InputChanged:Connect(function(inp)
+				if dragging_ and (inp.UserInputType == Enum.UserInputType.MouseMovement or inp.UserInputType == Enum.UserInputType.Touch) then
+					update(inp)
+				end
+			end)
+
+			local conn
+			conn = input.Changed:Connect(function()
 				if input.UserInputState == Enum.UserInputState.End then
 					dragging_ = false
+					if dragConn then
+						dragConn:Disconnect()
+						dragConn = nil
+					end
+					conn:Disconnect()
 				end
 			end)
 		end
 	end
 
-	local function onDragUpdate(input)
-		if dragging_ and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-			dragInput = input
-		end
-	end
-
-    interact.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            onDragStart(input)
-        end
-    end)
-
-    interact.InputChanged:Connect(onDragUpdate)
-
-    UserInputService.InputChanged:Connect(function(input)
-        if input == dragInput and dragging_ then
-            update(input)
-        end
-    end)
-
-    interact.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging_ = false
-        end
-    end)
-    
 	if not Settings.DragStyle or Settings.DragStyle == 1 then
-		interact.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				onDragStart(input)
-			end
-		end)
-
-		interact.InputChanged:Connect(onDragUpdate)
-
-		UserInputService.InputChanged:Connect(function(input)
-			if input == dragInput and dragging_ then
-				update(input)
-			end
-		end)
-
-		interact.InputEnded:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				dragging_ = false
-			end
-		end)
+		interact.InputBegan:Connect(onDragStart)
 	elseif Settings.DragStyle == 2 then
-		base.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				onDragStart(input)
-			end
-		end)
-
-		base.InputChanged:Connect(onDragUpdate)
-
-		UserInputService.InputChanged:Connect(function(input)
-			if input == dragInput and dragging_ then
-				update(input)
-			end
-		end)
-
-		base.InputEnded:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				dragging_ = false
-			end
-		end)
+		base.InputBegan:Connect(onDragStart)
 	end
 
 	local currentTab = Instance.new("TextLabel")
@@ -1256,6 +1224,7 @@ function MacLib:Window(Settings)
 	-- Resize functionality
 	local resizing = false
 	local initialMousePos, initialBaseSize
+	local resizeConn
 	
 	resizeHandle.MouseEnter:Connect(function()
 		Tween(resizeIcon, TweenInfo.new(0.15, Enum.EasingStyle.Quint), {
@@ -1277,37 +1246,39 @@ function MacLib:Window(Settings)
 		resizing = true
 		initialMousePos = UserInputService:GetMouseLocation()
 		initialBaseSize = base.AbsoluteSize
+
+		if resizeConn then resizeConn:Disconnect() end
+		resizeConn = UserInputService.InputChanged:Connect(function(input)
+			if resizing and input.UserInputType == Enum.UserInputType.MouseMovement then
+				local mousePos = UserInputService:GetMouseLocation()
+				local delta = mousePos - initialMousePos
+				
+				local minWidth = 423
+				local minHeight = 285
+				
+				local newWidth = math.max(minWidth, initialBaseSize.X + delta.X)
+				local newHeight = math.max(minHeight, initialBaseSize.Y + delta.Y)
+				
+				base.Size = UDim2.fromOffset(newWidth, newHeight)
+				
+				if content and sidebar then
+				content.Size = UDim2.new(0, (base.AbsoluteSize.X - sidebar.AbsoluteSize.X), 1, 0)
+			end
+		end
 	end)
 	
 	UserInputService.InputEnded:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 then
 			if resizing then
 				resizing = false
+				if resizeConn then
+					resizeConn:Disconnect()
+					resizeConn = nil
+				end
 				Tween(resizeIcon, TweenInfo.new(0.15, Enum.EasingStyle.Quint), {
 					ImageTransparency = 0.5,
 					ImageColor3 = Color3.fromRGB(150, 150, 160)
 				}):Play()
-			end
-		end
-	end)
-	
-	UserInputService.InputChanged:Connect(function(input)
-		if resizing and input.UserInputType == Enum.UserInputType.MouseMovement then
-			local mousePos = UserInputService:GetMouseLocation()
-			local delta = mousePos - initialMousePos
-			
-			-- Minimum size constraint
-			local minWidth = 423
-			local minHeight = 285
-			
-			local newWidth = math.max(minWidth, initialBaseSize.X + delta.X)
-			local newHeight = math.max(minHeight, initialBaseSize.Y + delta.Y)
-			
-			base.Size = UDim2.fromOffset(newWidth, newHeight)
-			
-			-- Update content size dynamically
-			if content and sidebar then
-				content.Size = UDim2.new(0, (base.AbsoluteSize.X - sidebar.AbsoluteSize.X), 1, 0)
 			end
 		end
 	end)
@@ -2380,16 +2351,28 @@ function MacLib:Window(Settings)
 
 					SetValue(SliderFunctions.Settings.Default, true)
 
+					local dragConn
 					sliderHead.InputBegan:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							dragging = true
 							SetValue(input)
+
+							if dragConn then dragConn:Disconnect() end
+							dragConn = UserInputService.InputChanged:Connect(function(inp)
+								if dragging and (inp.UserInputType == Enum.UserInputType.MouseMovement or inp.UserInputType == Enum.UserInputType.Touch) then
+									SetValue(inp)
+								end
+							end)
 						end
 					end)
 
 					sliderHead.InputEnded:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							dragging = false
+							if dragConn then
+								dragConn:Disconnect()
+								dragConn = nil
+							end
 							if SliderFunctions.Settings.onInputComplete then
 								SliderFunctions.Settings.onInputComplete(finalValue)
 							end
@@ -2416,12 +2399,6 @@ function MacLib:Window(Settings)
 						
 						if SliderFunctions.Settings.onInputComplete then
 							SliderFunctions.Settings.onInputComplete(finalValue)
-						end
-					end)
-
-					UserInputService.InputChanged:Connect(function(input)
-						if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-							SetValue(input)
 						end
 					end)
 
@@ -4816,10 +4793,33 @@ function MacLib:Window(Settings)
 						UpdateRingFromHSV(hue, saturation)
 					end
 
+					local dragConn
+
+					local function setupDrag(input)
+						if dragConn then dragConn:Disconnect() end
+						dragConn = UserInputService.InputChanged:Connect(function(inp)
+							if inp.UserInputType == Enum.UserInputType.MouseMovement or inp.UserInputType == Enum.UserInputType.Touch then
+								if SlideDown then
+									UpdateSlide(Mouse.X)
+								elseif WheelDown then
+									UpdateRing(Mouse.X, Mouse.Y)
+								end
+							end
+						end)
+					end
+
+					local function endDrag()
+						if dragConn and not SlideDown and not WheelDown then
+							dragConn:Disconnect()
+							dragConn = nil
+						end
+					end
+
 					wheel.InputBegan:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							WheelDown = true
 							UpdateRing(Mouse.X, Mouse.Y)
+							setupDrag(input)
 						end
 					end)
 
@@ -4827,28 +4827,21 @@ function MacLib:Window(Settings)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							SlideDown = true
 							UpdateSlide(Mouse.X)
+							setupDrag(input)
 						end
 					end)
 
 					slider.InputEnded:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							SlideDown = false
+							endDrag()
 						end
 					end)
 
 					wheel.InputEnded:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							WheelDown = false
-						end
-					end)
-
-					UserInputService.InputChanged:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-							if SlideDown then
-								UpdateSlide(Mouse.X)
-							elseif WheelDown then
-								UpdateRing(Mouse.X, Mouse.Y)
-							end
+							endDrag()
 						end
 					end)
 
