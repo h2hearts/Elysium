@@ -1973,7 +1973,7 @@ function MacLib:Window(Settings)
 
 					local TweenSettings = {
 						DefaultColor = Color3.fromRGB(22, 22, 22),
-						HoverColor = Color3.fromRGB(62, 56, 78),
+						HoverColor = Color3.fromRGB(52, 52, 52),
 						PressColor = Color3.fromRGB(40, 36, 52),
 
 						EasingStyle = Enum.EasingStyle.Quint
@@ -2121,7 +2121,7 @@ function MacLib:Window(Settings)
 					toggle1.Parent = toggle
 
 					local toggle1Colors = {
-						Enabled = Color3.fromRGB(234, 229, 220), -- Purple-500 (brighter)
+						Enabled = Color3.fromRGB(234, 229, 220), -- White (brighter)
 						Disabled = Color3.fromRGB(63, 63, 70)   -- Zinc-700 (OFF state)
 					}
 					local togglerHeadPositions = {
@@ -2298,7 +2298,7 @@ function MacLib:Window(Settings)
 					local sliderHead = Instance.new("ImageButton")
 					sliderHead.Name = "SliderHead"
 					sliderHead.Image = assets.sliderhead
-					sliderHead.ImageColor3 = Color3.fromRGB(234, 229, 220) -- Purple-500
+					sliderHead.ImageColor3 = Color3.fromRGB(234, 229, 220) -- White (brighter)
 					sliderHead.AnchorPoint = Vector2.new(0.5, 0.5)
 					sliderHead.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 					sliderHead.BackgroundTransparency = 1
@@ -2809,7 +2809,7 @@ function MacLib:Window(Settings)
 					-- Focus states
 					InputBox.Focused:Connect(function()
 						Tween(inputBoxUIStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quint), {
-							Color = Color3.fromRGB(234, 229, 220), -- Purple-500 brighter
+							Color = Color3.fromRGB(234, 229, 220), -- White (brighter)
 							Transparency = 0
 						}):Play()
 						Tween(inputBoxUIStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quint), {
