@@ -55,17 +55,9 @@ local function __create_gui(parent: Instance): ScreenGui
 
     --@stroke
     local ui_stroke          = Instance.new("UIStroke", main_frame)
-    ui_stroke.Color          = Color3.fromRGB(159, 122, 234)
-    ui_stroke.Thickness      = 1.5
-    ui_stroke.Transparency   = 0.5
-
-    --@stroke_gradient
-    local stroke_gradient    = Instance.new("UIGradient", ui_stroke)
-    stroke_gradient.Rotation = 135
-    stroke_gradient.Color    = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(196, 181, 253)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(75, 53, 128)),
-    })
+    ui_stroke.Color          = Color3.fromRGB(65, 62, 75)
+    ui_stroke.Thickness      = 1.2
+    ui_stroke.Transparency   = 0.65
 
     --@icon
     local icon_label                  = Instance.new("ImageLabel", main_frame)
