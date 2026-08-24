@@ -872,7 +872,7 @@ function MacLib:Window(Settings)
 	tabSwitchersScrollingFrame.BottomImage = "rbxasset://textures/ui/Scroll/scroll-bottom.png"
 	tabSwitchersScrollingFrame.CanvasSize = UDim2.new()
 	tabSwitchersScrollingFrame.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-	tabSwitchersScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(34, 40, 49)
+	tabSwitchersScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(234, 229, 220)
 	tabSwitchersScrollingFrame.ScrollBarImageTransparency = 0.4
 	tabSwitchersScrollingFrame.ScrollBarThickness = 6
 	tabSwitchersScrollingFrame.TopImage = "rbxasset://textures/ui/Scroll/scroll-top.png"
@@ -1764,7 +1764,7 @@ function MacLib:Window(Settings)
 			elementsScrolling.BottomImage = "rbxasset://textures/ui/Scroll/scroll-bottom.png"
 			elementsScrolling.CanvasSize = UDim2.new()
 			elementsScrolling.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-			elementsScrolling.ScrollBarImageColor3 = Color3.fromRGB(34, 40, 49)
+			elementsScrolling.ScrollBarImageColor3 = Color3.fromRGB(234, 229, 220)
 			elementsScrolling.ScrollBarImageTransparency = 0.4
 			elementsScrolling.ScrollBarThickness = 6
 			elementsScrolling.TopImage = "rbxasset://textures/ui/Scroll/scroll-top.png"
@@ -3170,7 +3170,7 @@ function MacLib:Window(Settings)
 			optionsScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 			optionsScrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 			optionsScrollFrame.ScrollBarThickness = 6
-			optionsScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(150, 150, 160)
+			optionsScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(234, 229, 220) -- Beige color
 			optionsScrollFrame.ScrollBarImageTransparency = 0.2
 			optionsScrollFrame.ScrollingDirection = Enum.ScrollingDirection.Y
 			optionsScrollFrame.ClipsDescendants = true
