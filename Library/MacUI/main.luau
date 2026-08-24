@@ -121,19 +121,19 @@ function MacLib:Window(Settings)
     base.AnchorPoint = Vector2.new(0.5, 0.5)
     base.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
     base.ClipsDescendants = true
-    base.BackgroundTransparency = 0
+    base.BackgroundTransparency = 0.12
     base.BorderColor3 = Color3.fromRGB(0, 0, 0)
     base.BorderSizePixel = 0
     base.Position = UDim2.fromScale(0.5, 0.5)
     base.Size = Settings.Size or UDim2.fromOffset(868, 650)
     base.Visible = false
     
-    -- Cosmic Gradient (#23212C)
+    -- Cosmic Frosted Glass Gradient (#23212C)
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(42, 40, 52)),
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(50, 46, 65)),
         ColorSequenceKeypoint.new(0.5, Color3.fromRGB(35, 33, 44)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(28, 26, 35))
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 23, 33))
     }
     gradient.Rotation = 135
     gradient.Parent = base
@@ -217,7 +217,7 @@ function MacLib:Window(Settings)
 		)
 		
 		local stage1FadeTween = tweenService:Create(base, stage1FadeTweenInfo, {
-			BackgroundTransparency = 0
+			BackgroundTransparency = 0.12
 		})
 		
 		stage1ScaleTween:Play()
@@ -265,21 +265,21 @@ function MacLib:Window(Settings)
 
 	local baseUICorner = Instance.new("UICorner")
 	baseUICorner.Name = "BaseUICorner"
-	baseUICorner.CornerRadius = UDim.new(0, 16)
+	baseUICorner.CornerRadius = UDim.new(0, 18)
 	baseUICorner.Parent = base
 
 	local baseUIStroke = Instance.new("UIStroke")
 	baseUIStroke.Name = "BaseUIStroke"
 	baseUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	baseUIStroke.Color = Color3.fromRGB(65, 62, 75)
-	baseUIStroke.Transparency = 0.65
+	baseUIStroke.Color = Color3.fromRGB(80, 75, 95)
+	baseUIStroke.Transparency = 0.55
 	baseUIStroke.Thickness = 1.2
 	baseUIStroke.Parent = base
 
 	local sidebar = Instance.new("Frame")
 	sidebar.Name = "Sidebar"
-	sidebar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	sidebar.BackgroundTransparency = 1
+	sidebar.BackgroundColor3 = Color3.fromRGB(28, 25, 36)
+	sidebar.BackgroundTransparency = 0.4
 	sidebar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	sidebar.BorderSizePixel = 0
 	sidebar.Position = UDim2.fromScale(-3.52e-08, 4.69e-08)
@@ -288,8 +288,8 @@ function MacLib:Window(Settings)
 	local divider = Instance.new("Frame")
 	divider.Name = "Divider"
 	divider.AnchorPoint = Vector2.new(1, 0)
-	divider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	divider.BackgroundTransparency = 0.9
+	divider.BackgroundColor3 = Color3.fromRGB(90, 80, 115)
+	divider.BackgroundTransparency = 0.85
 	divider.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	divider.BorderSizePixel = 0
 	divider.Position = UDim2.fromScale(1, 0)
@@ -1539,7 +1539,7 @@ function MacLib:Window(Settings)
 			tabSwitcher.TextSize = 14
 			tabSwitcher.AutoButtonColor = false
 			tabSwitcher.AnchorPoint = Vector2.new(0.5, 0)
-			tabSwitcher.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			tabSwitcher.BackgroundColor3 = Color3.fromRGB(55, 48, 72)
 			tabSwitcher.BackgroundTransparency = 1
 			tabSwitcher.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			tabSwitcher.BorderSizePixel = 0
@@ -1556,9 +1556,9 @@ function MacLib:Window(Settings)
 			local tabSwitcherUIStroke = Instance.new("UIStroke")
 			tabSwitcherUIStroke.Name = "TabSwitcherUIStroke"
 			tabSwitcherUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-			tabSwitcherUIStroke.Color = Color3.fromRGB(139, 92, 246) -- Purple-500
+			tabSwitcherUIStroke.Color = Color3.fromRGB(85, 78, 108)
 			tabSwitcherUIStroke.Transparency = 1
-			tabSwitcherUIStroke.Thickness = 1.5
+			tabSwitcherUIStroke.Thickness = 1
 			tabSwitcherUIStroke.Parent = tabSwitcher
 
 			local tabSwitcherUIListLayout = Instance.new("UIListLayout")
@@ -1706,8 +1706,8 @@ function MacLib:Window(Settings)
 				local section = Instance.new("Frame")
 				section.Name = "Section"
 				section.AutomaticSize = Enum.AutomaticSize.Y
-				section.BackgroundColor3 = Color3.fromRGB(26, 24, 33) -- Clean Cosmic Card
-				section.BackgroundTransparency = 0
+				section.BackgroundColor3 = Color3.fromRGB(26, 24, 34) -- Frosted Cosmic Glass Card
+				section.BackgroundTransparency = 0.35
 				section.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				section.BorderSizePixel = 0
 				section.Position = UDim2.fromScale(0, 6.78e-08)
@@ -1723,8 +1723,8 @@ function MacLib:Window(Settings)
 				local sectionUIStroke = Instance.new("UIStroke")
 				sectionUIStroke.Name = "SectionUIStroke"
 				sectionUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-				sectionUIStroke.Color = Color3.fromRGB(50, 48, 60)
-				sectionUIStroke.Transparency = 0.6
+				sectionUIStroke.Color = Color3.fromRGB(75, 70, 95)
+				sectionUIStroke.Transparency = 0.65
 				sectionUIStroke.Thickness = 1
 				sectionUIStroke.Parent = section
 
@@ -1824,8 +1824,8 @@ function MacLib:Window(Settings)
                     buttonInteract.TextSize = 14.5
                     buttonInteract.TextTransparency = 0
                     buttonInteract.TextXAlignment = Enum.TextXAlignment.Center
-                    buttonInteract.BackgroundColor3 = Color3.fromRGB(82, 82, 91) -- Zinc-600 (more visible)
-                    buttonInteract.BackgroundTransparency = 0
+                    buttonInteract.BackgroundColor3 = Color3.fromRGB(48, 44, 60)
+                    buttonInteract.BackgroundTransparency = 0.2
                     buttonInteract.TextStrokeTransparency = 1
                     buttonInteract.BorderColor3 = Color3.fromRGB(0, 0, 0)
                     buttonInteract.BorderSizePixel = 0
@@ -1842,7 +1842,7 @@ function MacLib:Window(Settings)
                     
                     -- Add stroke/border
                     local buttonStroke = Instance.new("UIStroke")
-                    buttonStroke.Color = Color3.fromRGB(113, 113, 122) -- Zinc-500
+                    buttonStroke.Color = Color3.fromRGB(75, 70, 95)
                     buttonStroke.Transparency = 0.6
                     buttonStroke.Thickness = 1
                     buttonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
@@ -1863,9 +1863,9 @@ function MacLib:Window(Settings)
 					buttonImage.Parent = buttonInteract
 
 					local TweenSettings = {
-						DefaultColor = Color3.fromRGB(82, 82, 91),
-						HoverColor = Color3.fromRGB(113, 113, 122),
-						PressColor = Color3.fromRGB(63, 63, 70),
+						DefaultColor = Color3.fromRGB(48, 44, 60),
+						HoverColor = Color3.fromRGB(62, 56, 78),
+						PressColor = Color3.fromRGB(40, 36, 52),
 
 						EasingStyle = Enum.EasingStyle.Quint
 					}
@@ -5370,12 +5370,12 @@ function MacLib:Window(Settings)
 
 				for i, tabInfo in pairs(tabs) do
 					Tween(i, TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
-						BackgroundTransparency = (i == tabSwitcher and 0.98 or 1)
+						BackgroundTransparency = (i == tabSwitcher and 0.55 or 1)
 					}):Play()
 
 					if tabInfo.tabStroke then
 						Tween(tabInfo.tabStroke, TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
-							Transparency = (i == tabSwitcher and 0.95 or 1)
+							Transparency = (i == tabSwitcher and 0.6 or 1)
 						}):Play()
 					end
 					if tabInfo.switcherImage then
