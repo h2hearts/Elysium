@@ -110,16 +110,10 @@ function MacLib:Window(Settings)
 	notificationsUIPadding.PaddingTop = UDim.new(0, 10)
 	notificationsUIPadding.Parent = notifications
 
-	-- Acrylic Blur Effect for true in-game frosted glass
-	local blurEffect = Lighting:FindFirstChild("Elysium_AcrylicBlur")
-	if not blurEffect then
-		blurEffect = Instance.new("BlurEffect")
-		blurEffect.Name = "Elysium_AcrylicBlur"
-		blurEffect.Size = 20
-		blurEffect.Parent = Lighting
-	else
-		blurEffect.Size = 20
-		blurEffect.Enabled = true
+	-- Cleanup any leftover blur effects
+	local existingBlur = game:GetService("Lighting"):FindFirstChild("Elysium_AcrylicBlur")
+	if existingBlur then
+		existingBlur:Destroy()
 	end
 
 	local base = Instance.new("Frame")
@@ -127,28 +121,28 @@ function MacLib:Window(Settings)
     base.AnchorPoint = Vector2.new(0.5, 0.5)
     base.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
     base.ClipsDescendants = true
-    base.BackgroundTransparency = 0.32
+    base.BackgroundTransparency = 0
     base.BorderColor3 = Color3.fromRGB(0, 0, 0)
     base.BorderSizePixel = 0
     base.Position = UDim2.fromScale(0.5, 0.5)
     base.Size = Settings.Size or UDim2.fromOffset(868, 650)
     base.Visible = false
     
-    -- Cosmic Frosted Glass Gradient
+    -- Cosmic Gradient (#23212C)
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(48, 44, 62)),
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(42, 40, 52)),
         ColorSequenceKeypoint.new(0.5, Color3.fromRGB(35, 33, 44)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 22, 30))
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(28, 26, 35))
     }
     gradient.Rotation = 135
     gradient.Parent = base
 
-    -- Specular Frosted Glass Top Sheen
+    -- Subtle Specular Highlight
     local glassSheen = Instance.new("Frame")
     glassSheen.Name = "GlassSheen"
     glassSheen.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    glassSheen.BackgroundTransparency = 0.93
+    glassSheen.BackgroundTransparency = 0.96
     glassSheen.BorderSizePixel = 0
     glassSheen.Size = UDim2.fromScale(1, 1)
     glassSheen.ZIndex = 0
@@ -161,8 +155,8 @@ function MacLib:Window(Settings)
     local glassSheenGradient = Instance.new("UIGradient")
     glassSheenGradient.Rotation = 90
     glassSheenGradient.Transparency = NumberSequence.new{
-        NumberSequenceKeypoint.new(0, 0.75),
-        NumberSequenceKeypoint.new(0.35, 0.95),
+        NumberSequenceKeypoint.new(0, 0.82),
+        NumberSequenceKeypoint.new(0.3, 0.98),
         NumberSequenceKeypoint.new(1, 1)
     }
     glassSheenGradient.Parent = glassSheen
@@ -223,7 +217,7 @@ function MacLib:Window(Settings)
 		)
 		
 		local stage1FadeTween = tweenService:Create(base, stage1FadeTweenInfo, {
-			BackgroundTransparency = 0.32
+			BackgroundTransparency = 0
 		})
 		
 		stage1ScaleTween:Play()
@@ -277,19 +271,10 @@ function MacLib:Window(Settings)
 	local baseUIStroke = Instance.new("UIStroke")
 	baseUIStroke.Name = "BaseUIStroke"
 	baseUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	baseUIStroke.Color = Color3.fromRGB(159, 122, 234) -- Violet Glow
+	baseUIStroke.Color = Color3.fromRGB(65, 62, 75)
 	baseUIStroke.Transparency = 0.65
-	baseUIStroke.Thickness = 1.5
+	baseUIStroke.Thickness = 1.2
 	baseUIStroke.Parent = base
-
-	local baseStrokeGradient = Instance.new("UIGradient")
-	baseStrokeGradient.Rotation = 135
-	baseStrokeGradient.Color = ColorSequence.new{
-		ColorSequenceKeypoint.new(0, Color3.fromRGB(196, 181, 253)),
-		ColorSequenceKeypoint.new(0.5, Color3.fromRGB(159, 122, 234)),
-		ColorSequenceKeypoint.new(1, Color3.fromRGB(75, 53, 128))
-	}
-	baseStrokeGradient.Parent = baseUIStroke
 
 	local sidebar = Instance.new("Frame")
 	sidebar.Name = "Sidebar"
@@ -1097,9 +1082,9 @@ function MacLib:Window(Settings)
 	local globalSettingsUIStroke = Instance.new("UIStroke")
 	globalSettingsUIStroke.Name = "GlobalSettingsUIStroke"
 	globalSettingsUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	globalSettingsUIStroke.Color = Color3.fromRGB(159, 122, 234)
+	globalSettingsUIStroke.Color = Color3.fromRGB(65, 62, 75)
 	globalSettingsUIStroke.Transparency = 0.65
-	globalSettingsUIStroke.Thickness = 1.5
+	globalSettingsUIStroke.Thickness = 1.2
 	globalSettingsUIStroke.Parent = globalSettings
 
 	local globalSettingsUICorner = Instance.new("UICorner")
@@ -1721,8 +1706,8 @@ function MacLib:Window(Settings)
 				local section = Instance.new("Frame")
 				section.Name = "Section"
 				section.AutomaticSize = Enum.AutomaticSize.Y
-				section.BackgroundColor3 = Color3.fromRGB(28, 26, 36) -- Frosted Cosmic Card
-				section.BackgroundTransparency = 0.25
+				section.BackgroundColor3 = Color3.fromRGB(26, 24, 33) -- Clean Cosmic Card
+				section.BackgroundTransparency = 0
 				section.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				section.BorderSizePixel = 0
 				section.Position = UDim2.fromScale(0, 6.78e-08)
@@ -1738,8 +1723,8 @@ function MacLib:Window(Settings)
 				local sectionUIStroke = Instance.new("UIStroke")
 				sectionUIStroke.Name = "SectionUIStroke"
 				sectionUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-				sectionUIStroke.Color = Color3.fromRGB(159, 122, 234) -- Violet Glow Accent
-				sectionUIStroke.Transparency = 0.85
+				sectionUIStroke.Color = Color3.fromRGB(50, 48, 60)
+				sectionUIStroke.Transparency = 0.6
 				sectionUIStroke.Thickness = 1
 				sectionUIStroke.Parent = section
 
@@ -6229,11 +6214,6 @@ function MacLib:Window(Settings)
 	function WindowFunctions:SetState(State, TogglePos)
 		windowState = State
 		base.Visible = State
-		if blurEffect then
-			Tween(blurEffect, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {
-				Size = State and 20 or 0
-			}):Play()
-		end
 	end
 
 	function WindowFunctions:GetState()
@@ -6243,9 +6223,9 @@ function MacLib:Window(Settings)
 	local onUnloadCallback
 
 	function WindowFunctions:Unload()
-		if blurEffect then
-			blurEffect:Destroy()
-			blurEffect = nil
+		local existingBlur = game:GetService("Lighting"):FindFirstChild("Elysium_AcrylicBlur")
+		if existingBlur then
+			existingBlur:Destroy()
 		end
 		if onUnloadCallback then
 			onUnloadCallback()  
