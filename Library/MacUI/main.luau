@@ -1262,9 +1262,10 @@ function MacLib:Window(Settings)
 				base.Size = UDim2.fromOffset(newWidth, newHeight)
 				
 				if content and sidebar then
-				content.Size = UDim2.new(0, (base.AbsoluteSize.X - sidebar.AbsoluteSize.X), 1, 0)
+					content.Size = UDim2.new(0, (base.AbsoluteSize.X - sidebar.AbsoluteSize.X), 1, 0)
+				end
 			end
-		end
+		end)
 	end)
 	
 	UserInputService.InputEnded:Connect(function(input)
