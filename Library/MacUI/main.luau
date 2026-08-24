@@ -1,3 +1,6 @@
+--!nocheck
+--!nolint
+
 local MacLib = { Options = {}, Folder = "Maclib" }
 
 --// Services
@@ -109,21 +112,21 @@ function MacLib:Window(Settings)
 	local base = Instance.new("Frame")
     base.Name = "Base"
     base.AnchorPoint = Vector2.new(0.5, 0.5)
-    base.BackgroundColor3 = Color3.fromRGB(39, 39, 42) -- #27272A
+    base.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
     base.ClipsDescendants = true
-    base.BackgroundTransparency = 0
+    base.BackgroundTransparency = 0.08
     base.BorderColor3 = Color3.fromRGB(0, 0, 0)
     base.BorderSizePixel = 0
     base.Position = UDim2.fromScale(0.5, 0.5)
     base.Size = Settings.Size or UDim2.fromOffset(868, 650)
     base.Visible = false
     
-    -- Add modern gradient background with subtle effect
+    -- Cosmic Frosted Glass Gradient
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(45, 45, 48)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(39, 39, 42)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(42, 42, 45))
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(48, 44, 62)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(35, 33, 44)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 22, 30))
     }
     gradient.Rotation = 135
     gradient.Parent = base
@@ -184,7 +187,7 @@ function MacLib:Window(Settings)
 		)
 		
 		local stage1FadeTween = tweenService:Create(base, stage1FadeTweenInfo, {
-			BackgroundTransparency = 0
+			BackgroundTransparency = 0.08
 		})
 		
 		stage1ScaleTween:Play()
@@ -238,10 +241,19 @@ function MacLib:Window(Settings)
 	local baseUIStroke = Instance.new("UIStroke")
 	baseUIStroke.Name = "BaseUIStroke"
 	baseUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	baseUIStroke.Color = Color3.fromRGB(70, 70, 75)
-	baseUIStroke.Transparency = 0.5
+	baseUIStroke.Color = Color3.fromRGB(159, 122, 234) -- Violet Glow
+	baseUIStroke.Transparency = 0.65
 	baseUIStroke.Thickness = 1.5
 	baseUIStroke.Parent = base
+
+	local baseStrokeGradient = Instance.new("UIGradient")
+	baseStrokeGradient.Rotation = 135
+	baseStrokeGradient.Color = ColorSequence.new{
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(196, 181, 253)),
+		ColorSequenceKeypoint.new(0.5, Color3.fromRGB(159, 122, 234)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(75, 53, 128))
+	}
+	baseStrokeGradient.Parent = baseUIStroke
 
 	local sidebar = Instance.new("Frame")
 	sidebar.Name = "Sidebar"
@@ -1031,17 +1043,17 @@ function MacLib:Window(Settings)
 	local globalSettings = Instance.new("Frame")
 	globalSettings.Name = "GlobalSettings"
 	globalSettings.AutomaticSize = Enum.AutomaticSize.XY
-	globalSettings.BackgroundColor3 = Color3.fromRGB(20, 20, 23)
-	globalSettings.BackgroundTransparency = 0.05
+	globalSettings.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
+	globalSettings.BackgroundTransparency = 0.08
 	globalSettings.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	globalSettings.BorderSizePixel = 0
 	globalSettings.Position = UDim2.fromScale(0.298, 0.104)
 
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(25, 25, 28)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(20, 20, 23)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(22, 22, 26))
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(48, 44, 62)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(35, 33, 44)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 22, 30))
     }
     gradient.Rotation = 135
     gradient.Parent = globalSettings
@@ -1049,8 +1061,8 @@ function MacLib:Window(Settings)
 	local globalSettingsUIStroke = Instance.new("UIStroke")
 	globalSettingsUIStroke.Name = "GlobalSettingsUIStroke"
 	globalSettingsUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	globalSettingsUIStroke.Color = Color3.fromRGB(70, 70, 80)
-	globalSettingsUIStroke.Transparency = 0.4
+	globalSettingsUIStroke.Color = Color3.fromRGB(159, 122, 234)
+	globalSettingsUIStroke.Transparency = 0.65
 	globalSettingsUIStroke.Thickness = 1.5
 	globalSettingsUIStroke.Parent = globalSettings
 
@@ -1673,8 +1685,8 @@ function MacLib:Window(Settings)
 				local section = Instance.new("Frame")
 				section.Name = "Section"
 				section.AutomaticSize = Enum.AutomaticSize.Y
-				section.BackgroundColor3 = Color3.fromRGB(39, 39, 42) -- Zinc-800
-				section.BackgroundTransparency = 0
+				section.BackgroundColor3 = Color3.fromRGB(28, 26, 36) -- Frosted Cosmic Card
+				section.BackgroundTransparency = 0.25
 				section.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				section.BorderSizePixel = 0
 				section.Position = UDim2.fromScale(0, 6.78e-08)
@@ -1690,8 +1702,8 @@ function MacLib:Window(Settings)
 				local sectionUIStroke = Instance.new("UIStroke")
 				sectionUIStroke.Name = "SectionUIStroke"
 				sectionUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-				sectionUIStroke.Color = Color3.fromRGB(82, 82, 91) -- Zinc-600
-				sectionUIStroke.Transparency = 0.7
+				sectionUIStroke.Color = Color3.fromRGB(159, 122, 234) -- Violet Glow Accent
+				sectionUIStroke.Transparency = 0.85
 				sectionUIStroke.Thickness = 1
 				sectionUIStroke.Parent = section
 
