@@ -1,3 +1,8 @@
+
+
+
+
+
 local MacLib={Options={},Folder="Maclib"}
 
 
@@ -1928,7 +1933,7 @@ buttonInteract.TextColor3=Color3.fromRGB(255,255,255)
 buttonInteract.TextSize=14.5
 buttonInteract.TextTransparency=0
 buttonInteract.TextXAlignment=Enum.TextXAlignment.Center
-buttonInteract.BackgroundColor3=Color3.fromRGB(50,46,65)
+buttonInteract.BackgroundColor3=Color3.fromRGB(22,22,22)
 buttonInteract.BackgroundTransparency=0.2
 buttonInteract.TextStrokeTransparency=1
 buttonInteract.BorderColor3=Color3.fromRGB(0,0,0)
@@ -1967,7 +1972,7 @@ buttonImage.Size=UDim2.fromOffset(16,16)
 buttonImage.Parent=buttonInteract
 
 local TweenSettings={
-DefaultColor=Color3.fromRGB(50,46,65),
+DefaultColor=Color3.fromRGB(22,22,22),
 HoverColor=Color3.fromRGB(62,56,78),
 PressColor=Color3.fromRGB(40,36,52),
 
@@ -2116,7 +2121,7 @@ togglerHeadStroke.Parent=togglerHead
 toggle1.Parent=toggle
 
 local toggle1Colors={
-Enabled=Color3.fromRGB(168,85,247),
+Enabled=Color3.fromRGB(234,229,220),
 Disabled=Color3.fromRGB(63,63,70)
 }
 local togglerHeadPositions={
