@@ -1648,7 +1648,7 @@ function MacLib:Window(Settings)
 			tabSwitcher.TextSize = 14
 			tabSwitcher.AutoButtonColor = false
 			tabSwitcher.AnchorPoint = Vector2.new(0.5, 0)
-			tabSwitcher.BackgroundColor3 = Color3.fromRGB(62, 56, 78)
+			tabSwitcher.BackgroundColor3 = Color3.fromRGB(34, 40, 49)
 			tabSwitcher.BackgroundTransparency = 1
 			tabSwitcher.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			tabSwitcher.BorderSizePixel = 0
@@ -1665,7 +1665,7 @@ function MacLib:Window(Settings)
 			local tabSwitcherUIStroke = Instance.new("UIStroke")
 			tabSwitcherUIStroke.Name = "TabSwitcherUIStroke"
 			tabSwitcherUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-			tabSwitcherUIStroke.Color = Color3.fromRGB(62, 56, 78)
+			tabSwitcherUIStroke.Color = Color3.fromRGB(34, 40, 49)
 			tabSwitcherUIStroke.Transparency = 1
 			tabSwitcherUIStroke.Thickness = 1
 			tabSwitcherUIStroke.Parent = tabSwitcher
