@@ -1,5 +1,7 @@
 --!nocheck
 --!nolint
+--!native
+--!optimize 2
 
 local MacLib = { Options = {}, Folder = "Maclib" }
 
@@ -165,24 +167,30 @@ function MacLib:Window(Settings)
 			local absPos = base.AbsolutePosition
 			local absSize = base.AbsoluteSize
 			local distance = 0.45
-
-			local centerRay = camera:ViewportPointToRay(absPos.X + absSize.X / 2, absPos.Y + absSize.Y / 2)
-			local p1Ray = camera:ViewportPointToRay(absPos.X, absPos.Y)
-			local p2Ray = camera:ViewportPointToRay(absPos.X + absSize.X, absPos.Y + absSize.Y)
-
-			local centerPos = centerRay.Origin + centerRay.Direction.Unit * distance
-			local p1 = p1Ray.Origin + p1Ray.Direction.Unit * distance
-			local p2 = p2Ray.Origin + p2Ray.Direction.Unit * distance
-
 			local cameraCF = camera.CFrame
-			local localP1 = cameraCF:PointToObjectSpace(p1)
-			local localP2 = cameraCF:PointToObjectSpace(p2)
+			
+			-- Inset the glass part slightly so its sharp 3D corners hide behind the UI's rounded corners
+			local inset = 3.5
+			
+			local function get3DPosition(screenX, screenY)
+				local ray = camera:ViewportPointToRay(screenX, screenY)
+				local localDir = cameraCF:VectorToObjectSpace(ray.Direction)
+				local scalar = -distance / localDir.Z
+				return cameraCF * (localDir * scalar)
+			end
 
-			local width = math.abs(localP2.X - localP1.X)
-			local height = math.abs(localP2.Y - localP1.Y)
+			local pCenter = get3DPosition(absPos.X + absSize.X / 2, absPos.Y + absSize.Y / 2)
+			local pTL = get3DPosition(absPos.X + inset, absPos.Y + inset)
+			local pBR = get3DPosition(absPos.X + absSize.X - inset, absPos.Y + absSize.Y - inset)
+
+			local localPTL = cameraCF:PointToObjectSpace(pTL)
+			local localPBR = cameraCF:PointToObjectSpace(pBR)
+
+			local width = math.abs(localPBR.X - localPTL.X)
+			local height = math.abs(localPBR.Y - localPTL.Y)
 
 			acrylicPart.Size = Vector3.new(width, height, 0.001)
-			acrylicPart.CFrame = CFrame.new(centerPos, centerPos + cameraCF.LookVector)
+			acrylicPart.CFrame = CFrame.new(pCenter, pCenter + cameraCF.LookVector)
 		end
 
 		acrylicRenderConn = RunService.RenderStepped:Connect(updatePosition)
@@ -223,7 +231,7 @@ function MacLib:Window(Settings)
     glassSheen.Parent = base
 
     local glassSheenCorner = Instance.new("UICorner")
-    glassSheenCorner.CornerRadius = UDim.new(0, 16)
+    glassSheenCorner.CornerRadius = UDim.new(0, 12)
     glassSheenCorner.Parent = glassSheen
 
     local glassSheenGradient = Instance.new("UIGradient")
@@ -339,7 +347,7 @@ function MacLib:Window(Settings)
 
 	local baseUICorner = Instance.new("UICorner")
 	baseUICorner.Name = "BaseUICorner"
-	baseUICorner.CornerRadius = UDim.new(0, 18)
+	baseUICorner.CornerRadius = UDim.new(0, 12)
 	baseUICorner.Parent = base
 
 	local baseUIStroke = Instance.new("UIStroke")
