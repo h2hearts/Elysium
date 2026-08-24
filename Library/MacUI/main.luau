@@ -366,7 +366,7 @@ function MacLib:Window(Settings)
 	local baseUIStroke = Instance.new("UIStroke")
 	baseUIStroke.Name = "BaseUIStroke"
 	baseUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	baseUIStroke.Color = Color3.fromRGB(80, 75, 95)
+	baseUIStroke.Color = Color3.fromRGB(34, 40, 49)
 	baseUIStroke.Transparency = 0.55
 	baseUIStroke.Thickness = 1.2
 	baseUIStroke.Parent = base
@@ -872,7 +872,7 @@ function MacLib:Window(Settings)
 	tabSwitchersScrollingFrame.BottomImage = "rbxasset://textures/ui/Scroll/scroll-bottom.png"
 	tabSwitchersScrollingFrame.CanvasSize = UDim2.new()
 	tabSwitchersScrollingFrame.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-	tabSwitchersScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(90, 80, 115)
+	tabSwitchersScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(34, 40, 49)
 	tabSwitchersScrollingFrame.ScrollBarImageTransparency = 0.4
 	tabSwitchersScrollingFrame.ScrollBarThickness = 6
 	tabSwitchersScrollingFrame.TopImage = "rbxasset://textures/ui/Scroll/scroll-top.png"
@@ -1764,7 +1764,7 @@ function MacLib:Window(Settings)
 			elementsScrolling.BottomImage = "rbxasset://textures/ui/Scroll/scroll-bottom.png"
 			elementsScrolling.CanvasSize = UDim2.new()
 			elementsScrolling.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-			elementsScrolling.ScrollBarImageColor3 = Color3.fromRGB(90, 80, 115)
+			elementsScrolling.ScrollBarImageColor3 = Color3.fromRGB(34, 40, 49)
 			elementsScrolling.ScrollBarImageTransparency = 0.4
 			elementsScrolling.ScrollBarThickness = 6
 			elementsScrolling.TopImage = "rbxasset://textures/ui/Scroll/scroll-top.png"
