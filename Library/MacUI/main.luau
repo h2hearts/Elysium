@@ -127,17 +127,8 @@ function MacLib:Window(Settings)
 		acrylicDOF.FarIntensity = 0
 		acrylicDOF.InFocusRadius = 0.1
 		acrylicDOF.NearIntensity = 1
-		acrylicDOF.FocusDistance = 0.45
+		acrylicDOF.FocusDistance = 0.05 -- Adjusted to make it stronger locally
 		acrylicDOF.Parent = Lighting
-		
-		local oldBlur = Lighting:FindFirstChild("Elysium_UIBlur")
-		if oldBlur then oldBlur:Destroy() end
-		
-		local uiBlur = Instance.new("BlurEffect")
-		uiBlur.Name = "Elysium_UIBlur"
-		uiBlur.Size = 24
-		uiBlur.Enabled = true
-		uiBlur.Parent = Lighting
 
 		local oldFolder = workspace.CurrentCamera:FindFirstChild("Elysium_AcrylicFolder")
 		if oldFolder then oldFolder:Destroy() end
@@ -164,18 +155,15 @@ function MacLib:Window(Settings)
 
 		local function updatePosition()
 			local camera = workspace.CurrentCamera
-			local uiBlur = game:GetService("Lighting"):FindFirstChild("Elysium_UIBlur")
 			
 			if not camera or not base or not base.Parent or not base.Visible or not windowState then
 				if acrylicPart then acrylicPart.Transparency = 1 end
 				if acrylicDOF then acrylicDOF.Enabled = false end
-				if uiBlur then uiBlur.Enabled = false end
 				return
 			end
 
 			if acrylicDOF then acrylicDOF.Enabled = true end
 			if acrylicPart then acrylicPart.Transparency = 0.98 end
-			if uiBlur then uiBlur.Enabled = true end
 
 			local absPos = base.AbsolutePosition
 			local absSize = base.AbsoluteSize
