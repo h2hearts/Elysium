@@ -1535,7 +1535,7 @@ function MacLib:Window(Settings)
 			tabSwitcherUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 			tabSwitcherUIListLayout.Parent = tabSwitcher
 			
-		print("KONTENT")
+		print("\27[32m[Elysium] - UI Loaded\27[0m")
 		local tabImage
 		
 		if Settings.Image and Icon(Settings.Image) then
