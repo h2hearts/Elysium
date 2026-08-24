@@ -46,7 +46,7 @@ local function __create_gui(parent: Instance): ScreenGui
     local ui_gradient        = Instance.new("UIGradient", main_frame)
     ui_gradient.Rotation     = 135
     ui_gradient.Color        = ColorSequence.new({
-        ColorSequenceKeypoint.new(0,        Color3.fromRGB(54, 37, 92)), -- Violet
+        ColorSequenceKeypoint.new(0,        Color3.fromRGB(75, 53, 128)), -- Violet
         ColorSequenceKeypoint.new(0.5,      Color3.fromRGB(35, 33, 44)),
         ColorSequenceKeypoint.new(1,        Color3.fromRGB(24, 22, 30)),
     })
