@@ -69,6 +69,7 @@ end
 --// Library Functions
 function MacLib:Window(Settings)
 	local WindowFunctions = {Settings = Settings}
+	print("[Elysium] - UI Loaded")
 
 	local macLib = Instance.new("ScreenGui")
 	macLib.Name = "MacLib"
@@ -1535,7 +1536,6 @@ function MacLib:Window(Settings)
 			tabSwitcherUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 			tabSwitcherUIListLayout.Parent = tabSwitcher
 			
-		print("\27[32m[Elysium] - UI Loaded\27[0m")
 		local tabImage
 		
 		if Settings.Image and Icon(Settings.Image) then
