@@ -129,6 +129,15 @@ function MacLib:Window(Settings)
 		acrylicDOF.NearIntensity = 1
 		acrylicDOF.FocusDistance = 0.45
 		acrylicDOF.Parent = Lighting
+		
+		local oldBlur = Lighting:FindFirstChild("Elysium_UIBlur")
+		if oldBlur then oldBlur:Destroy() end
+		
+		local uiBlur = Instance.new("BlurEffect")
+		uiBlur.Name = "Elysium_UIBlur"
+		uiBlur.Size = 24
+		uiBlur.Enabled = true
+		uiBlur.Parent = Lighting
 
 		local oldFolder = workspace.CurrentCamera:FindFirstChild("Elysium_AcrylicFolder")
 		if oldFolder then oldFolder:Destroy() end
@@ -155,14 +164,18 @@ function MacLib:Window(Settings)
 
 		local function updatePosition()
 			local camera = workspace.CurrentCamera
+			local uiBlur = game:GetService("Lighting"):FindFirstChild("Elysium_UIBlur")
+			
 			if not camera or not base or not base.Parent or not base.Visible or not windowState then
 				if acrylicPart then acrylicPart.Transparency = 1 end
 				if acrylicDOF then acrylicDOF.Enabled = false end
+				if uiBlur then uiBlur.Enabled = false end
 				return
 			end
 
 			if acrylicDOF then acrylicDOF.Enabled = true end
 			if acrylicPart then acrylicPart.Transparency = 0.98 end
+			if uiBlur then uiBlur.Enabled = true end
 
 			local absPos = base.AbsolutePosition
 			local absSize = base.AbsoluteSize
@@ -438,7 +451,7 @@ function MacLib:Window(Settings)
 	uIPadding.Parent = controls
 
 	local windowControlSettings = {
-		sizes = { enabled = UDim2.fromOffset(8, 8), disabled = UDim2.fromOffset(7, 7) },
+		sizes = { enabled = UDim2.fromOffset(12, 12), disabled = UDim2.fromOffset(11, 11) },
 		transparencies = { enabled = 0, disabled = 1 },
 		strokeTransparency = 0.9,
 	}
@@ -524,9 +537,9 @@ function MacLib:Window(Settings)
 		end
 	end
 
-	applyState(maximize, false)
+	applyState(maximize, true)
 
-	local controlsList = {exit, minimize}
+	local controlsList = {exit, minimize, maximize}
 	for _, button in pairs(controlsList) do
 		local buttonName = button.Name
 		local isEnabled = true
@@ -1635,7 +1648,7 @@ function MacLib:Window(Settings)
 			tabSwitcher.TextSize = 14
 			tabSwitcher.AutoButtonColor = false
 			tabSwitcher.AnchorPoint = Vector2.new(0.5, 0)
-			tabSwitcher.BackgroundColor3 = Color3.fromRGB(64, 47, 102)
+			tabSwitcher.BackgroundColor3 = Color3.fromRGB(62, 56, 78)
 			tabSwitcher.BackgroundTransparency = 1
 			tabSwitcher.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			tabSwitcher.BorderSizePixel = 0
@@ -1652,7 +1665,7 @@ function MacLib:Window(Settings)
 			local tabSwitcherUIStroke = Instance.new("UIStroke")
 			tabSwitcherUIStroke.Name = "TabSwitcherUIStroke"
 			tabSwitcherUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-			tabSwitcherUIStroke.Color = Color3.fromRGB(64, 47, 102)
+			tabSwitcherUIStroke.Color = Color3.fromRGB(62, 56, 78)
 			tabSwitcherUIStroke.Transparency = 1
 			tabSwitcherUIStroke.Thickness = 1
 			tabSwitcherUIStroke.Parent = tabSwitcher
@@ -1802,7 +1815,7 @@ function MacLib:Window(Settings)
 				local section = Instance.new("Frame")
 				section.Name = "Section"
 				section.AutomaticSize = Enum.AutomaticSize.Y
-				section.BackgroundColor3 = Color3.fromRGB(54, 37, 92) -- Frosted Cosmic Glass Card
+				section.BackgroundColor3 = Color3.fromRGB(26, 24, 34) -- Frosted Cosmic Glass Card
 				section.BackgroundTransparency = 0.35
 				section.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				section.BorderSizePixel = 0
@@ -1960,7 +1973,7 @@ function MacLib:Window(Settings)
 
 					local TweenSettings = {
 						DefaultColor = Color3.fromRGB(50, 46, 65),
-						HoverColor = Color3.fromRGB(64, 47, 102),
+						HoverColor = Color3.fromRGB(62, 56, 78),
 						PressColor = Color3.fromRGB(40, 36, 52),
 
 						EasingStyle = Enum.EasingStyle.Quint
@@ -3827,7 +3840,7 @@ function MacLib:Window(Settings)
                     globalSettingsUIStroke.Parent = prompt  -- Letakkan setelah UICorner
                     
                     local gradient = Instance.new("UIGradient")
-                    gradient.Color = ColorSequence.new(Color3.fromRGB(44, 27, 82), Color3.fromRGB(64, 47, 102))
+                    gradient.Color = ColorSequence.new(Color3.fromRGB(85, 57, 139), Color3.fromRGB(62, 56, 78))
                     gradient.Rotation = 90
                     gradient.Parent = prompt
                     
@@ -4511,7 +4524,7 @@ function MacLib:Window(Settings)
 					confirm.TextTruncate = Enum.TextTruncate.AtEnd
 					confirm.AutoButtonColor = false
 					confirm.AutomaticSize = Enum.AutomaticSize.Y
-					confirm.BackgroundColor3 = Color3.fromRGB(44, 27, 82)
+					confirm.BackgroundColor3 = Color3.fromRGB(85, 57, 139)
 					confirm.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					confirm.BorderSizePixel = 0
                     confirm.Position = UDim2.new(0, 0,-0.333, 0)
@@ -4546,7 +4559,7 @@ function MacLib:Window(Settings)
 					cancel.TextTruncate = Enum.TextTruncate.AtEnd
 					cancel.AutoButtonColor = false
 					cancel.AutomaticSize = Enum.AutomaticSize.Y
-					cancel.BackgroundColor3 = Color3.fromRGB(44, 27, 82)
+					cancel.BackgroundColor3 = Color3.fromRGB(85, 57, 139)
 					cancel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					cancel.BorderSizePixel = 0
                     cancel.Position = UDim2.new(0.516, 0,-0.333, 0)
