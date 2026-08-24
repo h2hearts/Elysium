@@ -141,7 +141,7 @@ function MacLib:Window(Settings)
 		acrylicPart.Name = "AcrylicGlassPart"
 		acrylicPart.Material = Enum.Material.Glass
 		acrylicPart.Transparency = 0.98
-		acrylicPart.Color = Color3.fromRGB(240, 240, 255)
+		acrylicPart.Color = Color3.fromRGB(255, 255, 245)
 		acrylicPart.CastShadow = false
 		acrylicPart.CanCollide = false
 		acrylicPart.CanTouch = false
@@ -199,7 +199,7 @@ function MacLib:Window(Settings)
 	local base = Instance.new("Frame")
     base.Name = "Base"
     base.AnchorPoint = Vector2.new(0.5, 0.5)
-    base.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
+    base.BackgroundColor3 = Color3.fromRGB(241, 254, 200) -- Cosmic #23212C
     base.ClipsDescendants = true
     base.BackgroundTransparency = 0.32
     base.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -213,9 +213,9 @@ function MacLib:Window(Settings)
     -- Cosmic Frosted Glass Gradient (#23212C)
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(50, 46, 65)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(35, 33, 44)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 23, 33))
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 230)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(241, 254, 200)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(230, 245, 185))
     }
     gradient.Rotation = 135
     gradient.Parent = base
@@ -353,24 +353,38 @@ function MacLib:Window(Settings)
 	local baseUIStroke = Instance.new("UIStroke")
 	baseUIStroke.Name = "BaseUIStroke"
 	baseUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	baseUIStroke.Color = Color3.fromRGB(80, 75, 95)
+	baseUIStroke.Color = Color3.fromRGB(200, 215, 160)
 	baseUIStroke.Transparency = 0.55
 	baseUIStroke.Thickness = 1.2
 	baseUIStroke.Parent = base
 
 	local sidebar = Instance.new("Frame")
 	sidebar.Name = "Sidebar"
-	sidebar.BackgroundColor3 = Color3.fromRGB(28, 25, 36)
+	sidebar.BackgroundColor3 = Color3.fromRGB(245, 255, 215)
 	sidebar.BackgroundTransparency = 0.4
 	sidebar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	sidebar.BorderSizePixel = 0
 	sidebar.Position = UDim2.fromScale(-3.52e-08, 4.69e-08)
 	sidebar.Size = UDim2.fromScale(0.325, 1)
+	
+	local sidebarCorner = Instance.new("UICorner")
+	sidebarCorner.CornerRadius = UDim.new(0, 12)
+	sidebarCorner.Parent = sidebar
+	
+	local sidebarCornerFix = Instance.new("Frame")
+	sidebarCornerFix.Name = "CornerFix"
+	sidebarCornerFix.BackgroundColor3 = sidebar.BackgroundColor3
+	sidebarCornerFix.BackgroundTransparency = sidebar.BackgroundTransparency
+	sidebarCornerFix.BorderSizePixel = 0
+	sidebarCornerFix.Size = UDim2.new(0, 12, 1, 0)
+	sidebarCornerFix.AnchorPoint = Vector2.new(1, 0)
+	sidebarCornerFix.Position = UDim2.fromScale(1, 0)
+	sidebarCornerFix.Parent = sidebar
 
 	local divider = Instance.new("Frame")
 	divider.Name = "Divider"
 	divider.AnchorPoint = Vector2.new(1, 0)
-	divider.BackgroundColor3 = Color3.fromRGB(90, 80, 115)
+	divider.BackgroundColor3 = Color3.fromRGB(190, 205, 150)
 	divider.BackgroundTransparency = 0.85
 	divider.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	divider.BorderSizePixel = 0
@@ -623,7 +637,7 @@ function MacLib:Window(Settings)
 		Enum.FontStyle.Normal
 	)
 	title.Text = Settings.Title
-	title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title.TextColor3 = Color3.fromRGB(45, 50, 35)
 	title.RichText = true
 	title.TextSize = 18
 	title.TextTransparency = 0.1
@@ -648,7 +662,7 @@ function MacLib:Window(Settings)
 	subtitle.RichText = true
 	subtitle.Text = Settings.Subtitle
 	subtitle.RichText = true
-	subtitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+	subtitle.TextColor3 = Color3.fromRGB(45, 50, 35)
 	subtitle.TextSize = 12
 	subtitle.TextTransparency = 0.7
 	subtitle.TextTruncate = Enum.TextTruncate.SplitWord
@@ -762,7 +776,7 @@ function MacLib:Window(Settings)
 		Enum.FontStyle.Normal
 	)
 	displayName.Text = LocalPlayer.DisplayName
-	displayName.TextColor3 = Color3.fromRGB(255, 255, 255)
+	displayName.TextColor3 = Color3.fromRGB(45, 50, 35)
 	displayName.TextSize = 13
 	displayName.TextTransparency = 0.1
 	displayName.TextTruncate = Enum.TextTruncate.SplitWord
@@ -796,7 +810,7 @@ function MacLib:Window(Settings)
 		Enum.FontStyle.Normal
 	)
 	username.Text = "@" .. LocalPlayer.Name
-	username.TextColor3 = Color3.fromRGB(255, 255, 255)
+	username.TextColor3 = Color3.fromRGB(45, 50, 35)
 	username.TextSize = 12
 	username.TextTransparency = 0.7
 	username.TextTruncate = Enum.TextTruncate.SplitWord
@@ -845,7 +859,7 @@ function MacLib:Window(Settings)
 	tabSwitchersScrollingFrame.BottomImage = "rbxasset://textures/ui/Scroll/scroll-bottom.png"
 	tabSwitchersScrollingFrame.CanvasSize = UDim2.new()
 	tabSwitchersScrollingFrame.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-	tabSwitchersScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(113, 113, 122)
+	tabSwitchersScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(190, 205, 150)
 	tabSwitchersScrollingFrame.ScrollBarImageTransparency = 0.4
 	tabSwitchersScrollingFrame.ScrollBarThickness = 6
 	tabSwitchersScrollingFrame.TopImage = "rbxasset://textures/ui/Scroll/scroll-top.png"
@@ -1121,7 +1135,7 @@ function MacLib:Window(Settings)
 	currentTab.RichText = true
 	currentTab.Text = ""
 	currentTab.RichText = true
-	currentTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+	currentTab.TextColor3 = Color3.fromRGB(45, 50, 35)
 	currentTab.TextSize = 15
 	currentTab.TextTransparency = 0.5
 	currentTab.TextTruncate = Enum.TextTruncate.SplitWord
@@ -1146,7 +1160,7 @@ function MacLib:Window(Settings)
 	local globalSettings = Instance.new("Frame")
 	globalSettings.Name = "GlobalSettings"
 	globalSettings.AutomaticSize = Enum.AutomaticSize.XY
-	globalSettings.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
+	globalSettings.BackgroundColor3 = Color3.fromRGB(241, 254, 200) -- Cosmic #23212C
 	globalSettings.BackgroundTransparency = 0.08
 	globalSettings.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	globalSettings.BorderSizePixel = 0
@@ -1154,8 +1168,8 @@ function MacLib:Window(Settings)
 
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(48, 44, 62)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(35, 33, 44)),
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 230)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(241, 254, 200)),
         ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 22, 30))
     }
     gradient.Rotation = 135
@@ -1164,7 +1178,7 @@ function MacLib:Window(Settings)
 	local globalSettingsUIStroke = Instance.new("UIStroke")
 	globalSettingsUIStroke.Name = "GlobalSettingsUIStroke"
 	globalSettingsUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	globalSettingsUIStroke.Color = Color3.fromRGB(65, 62, 75)
+	globalSettingsUIStroke.Color = Color3.fromRGB(210, 225, 170)
 	globalSettingsUIStroke.Transparency = 0.65
 	globalSettingsUIStroke.Thickness = 1.2
 	globalSettingsUIStroke.Parent = globalSettings
@@ -1359,7 +1373,7 @@ function MacLib:Window(Settings)
 		settingName.FontFace = Font.new(assets.interFont)
 		settingName.Text = Settings.Name
 		settingName.RichText = true
-		settingName.TextColor3 = Color3.fromRGB(255, 255, 255)
+		settingName.TextColor3 = Color3.fromRGB(45, 50, 35)
 		settingName.TextSize = 13
 		settingName.TextTransparency = 0.5
 		settingName.TextTruncate = Enum.TextTruncate.SplitWord
@@ -1391,7 +1405,7 @@ function MacLib:Window(Settings)
 			Enum.FontStyle.Normal
 		)
 		checkmark.Text = "✓"
-		checkmark.TextColor3 = Color3.fromRGB(255, 255, 255)
+		checkmark.TextColor3 = Color3.fromRGB(45, 50, 35)
 		checkmark.TextSize = 13
 		checkmark.TextTransparency = 1
 		checkmark.TextXAlignment = Enum.TextXAlignment.Left
@@ -1489,12 +1503,12 @@ function MacLib:Window(Settings)
 		globalButton.FontFace = Font.new(assets.interFont, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 		globalButton.Text = Settings.Name
 		globalButton.RichText = true
-		globalButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		globalButton.TextColor3 = Color3.fromRGB(45, 50, 35)
 		globalButton.TextSize = 13
 		globalButton.TextTransparency = 0
 		globalButton.TextXAlignment = Enum.TextXAlignment.Center
 		globalButton.AutoButtonColor = false
-		globalButton.BackgroundColor3 = Color3.fromRGB(82, 82, 91) -- Zinc-600
+		globalButton.BackgroundColor3 = Color3.fromRGB(170, 185, 130) -- Zinc-600
 		globalButton.BackgroundTransparency = 0
 		globalButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		globalButton.BorderSizePixel = 0
@@ -1509,15 +1523,15 @@ function MacLib:Window(Settings)
 		local globalButtonUIStroke = Instance.new("UIStroke")
 		globalButtonUIStroke.Name = "GlobalButtonUIStroke"
 		globalButtonUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-		globalButtonUIStroke.Color = Color3.fromRGB(113, 113, 122) -- Zinc-500
+		globalButtonUIStroke.Color = Color3.fromRGB(190, 205, 150) -- Zinc-500
 		globalButtonUIStroke.Transparency = 0.6
 		globalButtonUIStroke.Thickness = 1
 		globalButtonUIStroke.Parent = globalButton
 
 		local TweenSettings = {
-			DefaultColor = Color3.fromRGB(82, 82, 91),
-			HoverColor = Color3.fromRGB(113, 113, 122),
-			PressColor = Color3.fromRGB(63, 63, 70),
+			DefaultColor = Color3.fromRGB(170, 185, 130),
+			HoverColor = Color3.fromRGB(190, 205, 150),
+			PressColor = Color3.fromRGB(150, 165, 110),
 			EasingStyle = Enum.EasingStyle.Quint
 		}
 
@@ -1621,7 +1635,7 @@ function MacLib:Window(Settings)
 			tabSwitcher.TextSize = 14
 			tabSwitcher.AutoButtonColor = false
 			tabSwitcher.AnchorPoint = Vector2.new(0.5, 0)
-			tabSwitcher.BackgroundColor3 = Color3.fromRGB(55, 48, 72)
+			tabSwitcher.BackgroundColor3 = Color3.fromRGB(225, 240, 180)
 			tabSwitcher.BackgroundTransparency = 1
 			tabSwitcher.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			tabSwitcher.BorderSizePixel = 0
@@ -1638,7 +1652,7 @@ function MacLib:Window(Settings)
 			local tabSwitcherUIStroke = Instance.new("UIStroke")
 			tabSwitcherUIStroke.Name = "TabSwitcherUIStroke"
 			tabSwitcherUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-			tabSwitcherUIStroke.Color = Color3.fromRGB(85, 78, 108)
+			tabSwitcherUIStroke.Color = Color3.fromRGB(225, 240, 180)
 			tabSwitcherUIStroke.Transparency = 1
 			tabSwitcherUIStroke.Thickness = 1
 			tabSwitcherUIStroke.Parent = tabSwitcher
@@ -1737,7 +1751,7 @@ function MacLib:Window(Settings)
 			elementsScrolling.BottomImage = "rbxasset://textures/ui/Scroll/scroll-bottom.png"
 			elementsScrolling.CanvasSize = UDim2.new()
 			elementsScrolling.MidImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-			elementsScrolling.ScrollBarImageColor3 = Color3.fromRGB(113, 113, 122)
+			elementsScrolling.ScrollBarImageColor3 = Color3.fromRGB(190, 205, 150)
 			elementsScrolling.ScrollBarImageTransparency = 0.4
 			elementsScrolling.ScrollBarThickness = 6
 			elementsScrolling.TopImage = "rbxasset://textures/ui/Scroll/scroll-top.png"
@@ -1788,7 +1802,7 @@ function MacLib:Window(Settings)
 				local section = Instance.new("Frame")
 				section.Name = "Section"
 				section.AutomaticSize = Enum.AutomaticSize.Y
-				section.BackgroundColor3 = Color3.fromRGB(26, 24, 34) -- Frosted Cosmic Glass Card
+				section.BackgroundColor3 = Color3.fromRGB(220, 235, 175) -- Frosted Cosmic Glass Card
 				section.BackgroundTransparency = 0.35
 				section.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				section.BorderSizePixel = 0
@@ -1902,11 +1916,11 @@ function MacLib:Window(Settings)
                     buttonInteract.Name = "ButtonInteract"
                     buttonInteract.FontFace = Font.new(assets.interFont, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
                     buttonInteract.RichText = true
-                    buttonInteract.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    buttonInteract.TextColor3 = Color3.fromRGB(45, 50, 35)
                     buttonInteract.TextSize = 14.5
                     buttonInteract.TextTransparency = 0
                     buttonInteract.TextXAlignment = Enum.TextXAlignment.Center
-                    buttonInteract.BackgroundColor3 = Color3.fromRGB(48, 44, 60)
+                    buttonInteract.BackgroundColor3 = Color3.fromRGB(255, 255, 230)
                     buttonInteract.BackgroundTransparency = 0.2
                     buttonInteract.TextStrokeTransparency = 1
                     buttonInteract.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -1945,9 +1959,9 @@ function MacLib:Window(Settings)
 					buttonImage.Parent = buttonInteract
 
 					local TweenSettings = {
-						DefaultColor = Color3.fromRGB(48, 44, 60),
-						HoverColor = Color3.fromRGB(62, 56, 78),
-						PressColor = Color3.fromRGB(40, 36, 52),
+						DefaultColor = Color3.fromRGB(255, 255, 230),
+						HoverColor = Color3.fromRGB(225, 240, 180),
+						PressColor = Color3.fromRGB(235, 250, 195),
 
 						EasingStyle = Enum.EasingStyle.Quint
 					}
@@ -2039,7 +2053,7 @@ function MacLib:Window(Settings)
                     toggle1.Text = ""
                     toggle1.AutoButtonColor = false
                     toggle1.AnchorPoint = Vector2.new(1, 0.5)
-                    toggle1.BackgroundColor3 = Color3.fromRGB(63, 63, 70) -- Zinc-700 (OFF state)
+                    toggle1.BackgroundColor3 = Color3.fromRGB(150, 165, 110) -- Zinc-700 (OFF state)
                     toggle1.BackgroundTransparency = 0
                     toggle1.BorderColor3 = Color3.fromRGB(0, 0, 0)
                     toggle1.BorderSizePixel = 0
@@ -2055,7 +2069,7 @@ function MacLib:Window(Settings)
                     local toggleStroke = Instance.new("UIStroke")
                     toggleStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
                     toggleStroke.LineJoinMode = Enum.LineJoinMode.Round
-                    toggleStroke.Color = Color3.fromRGB(113, 113, 122) -- Zinc-500
+                    toggleStroke.Color = Color3.fromRGB(190, 205, 150) -- Zinc-500
                     toggleStroke.Transparency = 0.7
                     toggleStroke.Thickness = 1
                     toggleStroke.Parent = toggle1
@@ -2095,7 +2109,7 @@ function MacLib:Window(Settings)
 
 					local toggle1Colors = {
 						Enabled = Color3.fromRGB(168, 85, 247), -- Purple-500 (brighter)
-						Disabled = Color3.fromRGB(63, 63, 70)   -- Zinc-700 (OFF state)
+						Disabled = Color3.fromRGB(150, 165, 110)   -- Zinc-700 (OFF state)
 					}
 					local togglerHeadPositions = {
 						Enabled = UDim2.new(1, 0, 0.5, 0),
@@ -2235,7 +2249,7 @@ function MacLib:Window(Settings)
 					local sliderValueUIStroke = Instance.new("UIStroke")
 					sliderValueUIStroke.Name = "SliderValueUIStroke"
 					sliderValueUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-					sliderValueUIStroke.Color = Color3.fromRGB(82, 82, 91) -- Zinc-600
+					sliderValueUIStroke.Color = Color3.fromRGB(170, 185, 130) -- Zinc-600
 					sliderValueUIStroke.Transparency = 0.6
 					sliderValueUIStroke.Thickness = 1
 					sliderValueUIStroke.Parent = sliderValue
@@ -2260,7 +2274,7 @@ function MacLib:Window(Settings)
 					local sliderBar = Instance.new("ImageLabel")
 					sliderBar.Name = "SliderBar"
 					sliderBar.Image = assets.sliderbar
-					sliderBar.ImageColor3 = Color3.fromRGB(63, 63, 70) -- Zinc-700 (track)
+					sliderBar.ImageColor3 = Color3.fromRGB(150, 165, 110) -- Zinc-700 (track)
 					sliderBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 					sliderBar.BackgroundTransparency = 1
 					sliderBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -2477,7 +2491,7 @@ function MacLib:Window(Settings)
 					local sliderValue = Instance.new("TextBox")
 					sliderValue.Name = "SliderValue"
 					sliderValue.FontFace = Font.new(assets.interFont, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
-					sliderValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+					sliderValue.TextColor3 = Color3.fromRGB(45, 50, 35)
 					sliderValue.TextSize = 12
 					sliderValue.TextTransparency = 0.1
 					sliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -2685,7 +2699,7 @@ function MacLib:Window(Settings)
 					inputBox.Text = "Hello world!"
 					inputBox.PlaceholderText = "Enter text..."
 					inputBox.PlaceholderColor3 = Color3.fromRGB(161, 161, 170) -- Zinc-400
-					inputBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputBox.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputBox.TextSize = 13.5
 					inputBox.TextTransparency = 0
 					inputBox.AnchorPoint = Vector2.new(1, 0.5)
@@ -2709,7 +2723,7 @@ function MacLib:Window(Settings)
 					local inputBoxUIStroke = Instance.new("UIStroke")
 					inputBoxUIStroke.Name = "InputBoxUIStroke"
 					inputBoxUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-					inputBoxUIStroke.Color = Color3.fromRGB(82, 82, 91) -- Zinc-600
+					inputBoxUIStroke.Color = Color3.fromRGB(170, 185, 130) -- Zinc-600
 					inputBoxUIStroke.Transparency = 0.7
 					inputBoxUIStroke.Thickness = 1
 					inputBoxUIStroke.Parent = inputBox
@@ -2792,7 +2806,7 @@ function MacLib:Window(Settings)
 
 					InputBox.FocusLost:Connect(function()
 						Tween(inputBoxUIStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quint), {
-							Color = Color3.fromRGB(82, 82, 91), -- Zinc-600
+							Color = Color3.fromRGB(170, 185, 130), -- Zinc-600
 							Transparency = 0.7,
 							Thickness = 1
 						}):Play()
@@ -2888,7 +2902,7 @@ function MacLib:Window(Settings)
 					binderBox.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 					binderBox.PlaceholderText = "..."
 					binderBox.Text = ""
-					binderBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+					binderBox.TextColor3 = Color3.fromRGB(45, 50, 35)
 					binderBox.TextSize = 12
 					binderBox.TextTransparency = 0.1
 					binderBox.AnchorPoint = Vector2.new(1, 0.5)
@@ -3087,7 +3101,7 @@ function MacLib:Window(Settings)
 					local dropdownUIStroke = Instance.new("UIStroke")
 					dropdownUIStroke.Name = "DropdownUIStroke"
 					dropdownUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-					dropdownUIStroke.Color = Color3.fromRGB(82, 82, 91) -- Zinc-600
+					dropdownUIStroke.Color = Color3.fromRGB(170, 185, 130) -- Zinc-600
 					dropdownUIStroke.Transparency = 0.7
 					dropdownUIStroke.Thickness = 1
 					dropdownUIStroke.Parent = dropdown
@@ -3443,7 +3457,7 @@ function MacLib:Window(Settings)
 						optionName.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 						optionName.Text = v
 						optionName.RichText = true
-						optionName.TextColor3 = Color3.fromRGB(255, 255, 255)
+						optionName.TextColor3 = Color3.fromRGB(45, 50, 35)
 						optionName.TextSize = 13
 						optionName.TextTransparency = 0.5
 						optionName.TextTruncate = Enum.TextTruncate.AtEnd
@@ -3470,7 +3484,7 @@ function MacLib:Window(Settings)
 						checkmark.Name = "Checkmark"
 						checkmark.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 						checkmark.Text = "✓"
-						checkmark.TextColor3 = Color3.fromRGB(255, 255, 255)
+						checkmark.TextColor3 = Color3.fromRGB(45, 50, 35)
 						checkmark.TextSize = 13
 						checkmark.TextTransparency = 1
 						checkmark.TextXAlignment = Enum.TextXAlignment.Left
@@ -3813,7 +3827,7 @@ function MacLib:Window(Settings)
                     globalSettingsUIStroke.Parent = prompt  -- Letakkan setelah UICorner
                     
                     local gradient = Instance.new("UIGradient")
-                    gradient.Color = ColorSequence.new(Color3.fromRGB(85, 57, 139), Color3.fromRGB(40, 25, 65))
+                    gradient.Color = ColorSequence.new(Color3.fromRGB(140, 160, 90), Color3.fromRGB(225, 240, 180))
                     gradient.Rotation = 90
                     gradient.Parent = prompt
                     
@@ -3976,7 +3990,7 @@ function MacLib:Window(Settings)
 					inputName.Name = "InputName"
 					inputName.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 					inputName.Text = "Red"
-					inputName.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputName.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputName.TextSize = 13
 					inputName.TextTransparency = 0.5
 					inputName.TextTruncate = Enum.TextTruncate.AtEnd
@@ -4006,7 +4020,7 @@ function MacLib:Window(Settings)
 					inputBox.CursorPosition = -1
 					inputBox.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 					inputBox.Text = "255"
-					inputBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputBox.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputBox.TextSize = 12
 					inputBox.TextTransparency = 0.1
 					inputBox.TextXAlignment = Enum.TextXAlignment.Left
@@ -4060,7 +4074,7 @@ function MacLib:Window(Settings)
 					inputName1.Name = "InputName"
 					inputName1.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 					inputName1.Text = "Green"
-					inputName1.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputName1.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputName1.TextSize = 13
 					inputName1.TextTransparency = 0.5
 					inputName1.TextTruncate = Enum.TextTruncate.AtEnd
@@ -4089,7 +4103,7 @@ function MacLib:Window(Settings)
 					inputBox1.ClearTextOnFocus = false
 					inputBox1.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 					inputBox1.Text = "255"
-					inputBox1.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputBox1.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputBox1.TextSize = 12
 					inputBox1.TextTransparency = 0.1
 					inputBox1.TextXAlignment = Enum.TextXAlignment.Left
@@ -4143,7 +4157,7 @@ function MacLib:Window(Settings)
 					inputName2.Name = "InputName"
 					inputName2.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 					inputName2.Text = "Blue"
-					inputName2.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputName2.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputName2.TextSize = 13
 					inputName2.TextTransparency = 0.5
 					inputName2.TextTruncate = Enum.TextTruncate.AtEnd
@@ -4172,7 +4186,7 @@ function MacLib:Window(Settings)
 					inputBox2.ClearTextOnFocus = false
 					inputBox2.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 					inputBox2.Text = "255"
-					inputBox2.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputBox2.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputBox2.TextSize = 12
 					inputBox2.TextTransparency = 0.1
 					inputBox2.TextXAlignment = Enum.TextXAlignment.Left
@@ -4227,7 +4241,7 @@ function MacLib:Window(Settings)
 					inputName3.Name = "InputName"
 					inputName3.FontFace = Font.new(assets.interFont, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 					inputName3.Text = "Alpha"
-					inputName3.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputName3.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputName3.TextSize = 13
 					inputName3.TextTransparency = 0.5
 					inputName3.TextTruncate = Enum.TextTruncate.AtEnd
@@ -4256,7 +4270,7 @@ function MacLib:Window(Settings)
 					inputBox3.ClearTextOnFocus = false
 					inputBox3.FontFace = Font.new(assets.interFont)
 					inputBox3.Text = "0"
-					inputBox3.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputBox3.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputBox3.TextSize = 12
 					inputBox3.TextTransparency = 0.1
 					inputBox3.TextXAlignment = Enum.TextXAlignment.Left
@@ -4309,7 +4323,7 @@ function MacLib:Window(Settings)
 					inputName4.Name = "InputName"
 					inputName4.FontFace = Font.new(assets.interFont)
 					inputName4.Text = "Hex"
-					inputName4.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputName4.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputName4.TextSize = 13
 					inputName4.TextTransparency = 0.5
 					inputName4.TextTruncate = Enum.TextTruncate.AtEnd
@@ -4339,7 +4353,7 @@ function MacLib:Window(Settings)
 					inputBox4.CursorPosition = -1
 					inputBox4.FontFace = Font.new(assets.interFont)
 					inputBox4.Text = "255"
-					inputBox4.TextColor3 = Color3.fromRGB(255, 255, 255)
+					inputBox4.TextColor3 = Color3.fromRGB(45, 50, 35)
 					inputBox4.TextSize = 12
 					inputBox4.TextTransparency = 0.1
 					inputBox4.TextXAlignment = Enum.TextXAlignment.Left
@@ -4491,13 +4505,13 @@ function MacLib:Window(Settings)
 						Enum.FontStyle.Normal
 					)
 					confirm.Text = "Confirm"
-					confirm.TextColor3 = Color3.fromRGB(255, 255, 255)
+					confirm.TextColor3 = Color3.fromRGB(45, 50, 35)
 					confirm.TextSize = 15
 					confirm.TextTransparency = 0.5
 					confirm.TextTruncate = Enum.TextTruncate.AtEnd
 					confirm.AutoButtonColor = false
 					confirm.AutomaticSize = Enum.AutomaticSize.Y
-					confirm.BackgroundColor3 = Color3.fromRGB(85, 57, 139)
+					confirm.BackgroundColor3 = Color3.fromRGB(140, 160, 90)
 					confirm.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					confirm.BorderSizePixel = 0
                     confirm.Position = UDim2.new(0, 0,-0.333, 0)
@@ -4526,13 +4540,13 @@ function MacLib:Window(Settings)
 						Enum.FontStyle.Normal
 					)
 					cancel.Text = "Cancel"
-					cancel.TextColor3 = Color3.fromRGB(255, 255, 255)
+					cancel.TextColor3 = Color3.fromRGB(45, 50, 35)
 					cancel.TextSize = 15
 					cancel.TextTransparency = 0.5
 					cancel.TextTruncate = Enum.TextTruncate.AtEnd
 					cancel.AutoButtonColor = false
 					cancel.AutomaticSize = Enum.AutomaticSize.Y
-					cancel.BackgroundColor3 = Color3.fromRGB(85, 57, 139)
+					cancel.BackgroundColor3 = Color3.fromRGB(140, 160, 90)
 					cancel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 					cancel.BorderSizePixel = 0
                     cancel.Position = UDim2.new(0.516, 0,-0.333, 0)
@@ -4585,7 +4599,7 @@ function MacLib:Window(Settings)
 					)
 					paragraphHeader.RichText = true
 					paragraphHeader.Text = ColorpickerFunctions.Settings.Name
-					paragraphHeader.TextColor3 = Color3.fromRGB(255, 255, 255)
+					paragraphHeader.TextColor3 = Color3.fromRGB(45, 50, 35)
 					paragraphHeader.TextSize = 19
 					paragraphHeader.TextTransparency = 0.1
 					paragraphHeader.TextWrapped = true
@@ -5708,8 +5722,8 @@ function MacLib:Window(Settings)
 		local variants = {
 			default = {
 				bg = Color3.fromRGB(24, 24, 27),       -- zinc-900
-				border = Color3.fromRGB(63, 63, 70),   -- zinc-700
-				accent = Color3.fromRGB(113, 113, 122), -- zinc-500
+				border = Color3.fromRGB(150, 165, 110),   -- zinc-700
+				accent = Color3.fromRGB(190, 205, 150), -- zinc-500
 				title = Color3.fromRGB(250, 250, 250), -- zinc-50
 				desc = Color3.fromRGB(161, 161, 170)   -- zinc-400
 			},
