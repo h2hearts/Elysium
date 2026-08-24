@@ -110,10 +110,82 @@ function MacLib:Window(Settings)
 	notificationsUIPadding.PaddingTop = UDim.new(0, 10)
 	notificationsUIPadding.Parent = notifications
 
-	-- Cleanup any leftover blur effects
-	local existingBlur = game:GetService("Lighting"):FindFirstChild("Elysium_AcrylicBlur")
-	if existingBlur then
-		existingBlur:Destroy()
+	-- Localized Acrylic System (Blurs ONLY behind the UI window, NOT the entire screen)
+	local acrylicPart = nil
+	local acrylicDOF = nil
+	local acrylicRenderConn = nil
+
+	local function initAcrylic()
+		local Lighting = game:GetService("Lighting")
+		local oldDOF = Lighting:FindFirstChild("Elysium_AcrylicDOF")
+		if oldDOF then oldDOF:Destroy() end
+
+		acrylicDOF = Instance.new("DepthOfFieldEffect")
+		acrylicDOF.Name = "Elysium_AcrylicDOF"
+		acrylicDOF.FarIntensity = 0
+		acrylicDOF.InFocusRadius = 0.1
+		acrylicDOF.NearIntensity = 1
+		acrylicDOF.FocusDistance = 0.45
+		acrylicDOF.Parent = Lighting
+
+		local oldFolder = workspace.CurrentCamera:FindFirstChild("Elysium_AcrylicFolder")
+		if oldFolder then oldFolder:Destroy() end
+
+		local acrylicFolder = Instance.new("Folder")
+		acrylicFolder.Name = "Elysium_AcrylicFolder"
+		acrylicFolder.Parent = workspace.CurrentCamera
+
+		acrylicPart = Instance.new("Part")
+		acrylicPart.Name = "AcrylicGlassPart"
+		acrylicPart.Material = Enum.Material.Glass
+		acrylicPart.Transparency = 0.98
+		acrylicPart.Color = Color3.fromRGB(240, 240, 255)
+		acrylicPart.CastShadow = false
+		acrylicPart.CanCollide = false
+		acrylicPart.CanTouch = false
+		acrylicPart.CanQuery = false
+		acrylicPart.Anchored = true
+		acrylicPart.Parent = acrylicFolder
+
+		local mesh = Instance.new("SpecialMesh")
+		mesh.MeshType = Enum.MeshType.Brick
+		mesh.Parent = acrylicPart
+
+		local function updatePosition()
+			local camera = workspace.CurrentCamera
+			if not camera or not base or not base.Parent or not base.Visible or not windowState then
+				if acrylicPart then acrylicPart.Transparency = 1 end
+				if acrylicDOF then acrylicDOF.Enabled = false end
+				return
+			end
+
+			if acrylicDOF then acrylicDOF.Enabled = true end
+			if acrylicPart then acrylicPart.Transparency = 0.98 end
+
+			local absPos = base.AbsolutePosition
+			local absSize = base.AbsoluteSize
+			local distance = 0.45
+
+			local centerRay = camera:ViewportPointToRay(absPos.X + absSize.X / 2, absPos.Y + absSize.Y / 2)
+			local p1Ray = camera:ViewportPointToRay(absPos.X, absPos.Y)
+			local p2Ray = camera:ViewportPointToRay(absPos.X + absSize.X, absPos.Y + absSize.Y)
+
+			local centerPos = centerRay.Origin + centerRay.Direction.Unit * distance
+			local p1 = p1Ray.Origin + p1Ray.Direction.Unit * distance
+			local p2 = p2Ray.Origin + p2Ray.Direction.Unit * distance
+
+			local cameraCF = camera.CFrame
+			local localP1 = cameraCF:PointToObjectSpace(p1)
+			local localP2 = cameraCF:PointToObjectSpace(p2)
+
+			local width = math.abs(localP2.X - localP1.X)
+			local height = math.abs(localP2.Y - localP1.Y)
+
+			acrylicPart.Size = Vector3.new(width, height, 0.001)
+			acrylicPart.CFrame = CFrame.new(centerPos, centerPos + cameraCF.LookVector)
+		end
+
+		acrylicRenderConn = RunService.RenderStepped:Connect(updatePosition)
 	end
 
 	local base = Instance.new("Frame")
@@ -121,12 +193,14 @@ function MacLib:Window(Settings)
     base.AnchorPoint = Vector2.new(0.5, 0.5)
     base.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
     base.ClipsDescendants = true
-    base.BackgroundTransparency = 0.12
+    base.BackgroundTransparency = 0.32
     base.BorderColor3 = Color3.fromRGB(0, 0, 0)
     base.BorderSizePixel = 0
     base.Position = UDim2.fromScale(0.5, 0.5)
     base.Size = Settings.Size or UDim2.fromOffset(868, 650)
     base.Visible = false
+
+	pcall(initAcrylic)
     
     -- Cosmic Frosted Glass Gradient (#23212C)
     local gradient = Instance.new("UIGradient")
@@ -217,7 +291,7 @@ function MacLib:Window(Settings)
 		)
 		
 		local stage1FadeTween = tweenService:Create(base, stage1FadeTweenInfo, {
-			BackgroundTransparency = 0.12
+			BackgroundTransparency = 0.32
 		})
 		
 		stage1ScaleTween:Play()
@@ -6214,6 +6288,12 @@ function MacLib:Window(Settings)
 	function WindowFunctions:SetState(State, TogglePos)
 		windowState = State
 		base.Visible = State
+		if acrylicDOF then
+			acrylicDOF.Enabled = State
+		end
+		if acrylicPart then
+			acrylicPart.Transparency = State and 0.98 or 1
+		end
 	end
 
 	function WindowFunctions:GetState()
@@ -6223,6 +6303,18 @@ function MacLib:Window(Settings)
 	local onUnloadCallback
 
 	function WindowFunctions:Unload()
+		if acrylicRenderConn then
+			acrylicRenderConn:Disconnect()
+			acrylicRenderConn = nil
+		end
+		if acrylicDOF then
+			acrylicDOF:Destroy()
+			acrylicDOF = nil
+		end
+		local oldFolder = workspace.CurrentCamera:FindFirstChild("Elysium_AcrylicFolder")
+		if oldFolder then
+			oldFolder:Destroy()
+		end
 		local existingBlur = game:GetService("Lighting"):FindFirstChild("Elysium_AcrylicBlur")
 		if existingBlur then
 			existingBlur:Destroy()
