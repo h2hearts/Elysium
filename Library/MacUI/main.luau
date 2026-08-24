@@ -1536,7 +1536,7 @@ function MacLib:Window(Settings)
 		local globalButtonUIStroke = Instance.new("UIStroke")
 		globalButtonUIStroke.Name = "GlobalButtonUIStroke"
 		globalButtonUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-		globalButtonUIStroke.Color = Color3.fromRGB(90, 80, 115) -- Zinc-500
+		globalButtonUIStroke.Color = Color3.fromRGB(34, 40, 49) -- Zinc-500
 		globalButtonUIStroke.Transparency = 0.6
 		globalButtonUIStroke.Thickness = 1
 		globalButtonUIStroke.Parent = globalButton
@@ -2066,7 +2066,7 @@ function MacLib:Window(Settings)
                     toggle1.Text = ""
                     toggle1.AutoButtonColor = false
                     toggle1.AnchorPoint = Vector2.new(1, 0.5)
-                    toggle1.BackgroundColor3 = Color3.fromRGB(34, 40, 49) 
+                    toggle1.BackgroundColor3 = Color3.fromRGB(63, 63, 70) -- Zinc-700 (OFF state)
                     toggle1.BackgroundTransparency = 0
                     toggle1.BorderColor3 = Color3.fromRGB(0, 0, 0)
                     toggle1.BorderSizePixel = 0
@@ -2082,7 +2082,7 @@ function MacLib:Window(Settings)
                     local toggleStroke = Instance.new("UIStroke")
                     toggleStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
                     toggleStroke.LineJoinMode = Enum.LineJoinMode.Round
-                    toggleStroke.Color = Color3.fromRGB(90, 80, 115) -- Zinc-500
+                    toggleStroke.Color = Color3.fromRGB(34, 40, 49) -- Zinc-500
                     toggleStroke.Transparency = 0.7
                     toggleStroke.Thickness = 1
                     toggleStroke.Parent = toggle1
@@ -2122,7 +2122,7 @@ function MacLib:Window(Settings)
 
 					local toggle1Colors = {
 						Enabled = Color3.fromRGB(234, 229, 220), -- White (brighter)
-						Disabled = Color3.fromRGB(63, 63, 70)   
+						Disabled = Color3.fromRGB(63, 63, 70)   -- Zinc-700 (OFF state)
 					}
 					local togglerHeadPositions = {
 						Enabled = UDim2.new(1, 0, 0.5, 0),
@@ -2287,7 +2287,7 @@ function MacLib:Window(Settings)
 					local sliderBar = Instance.new("ImageLabel")
 					sliderBar.Name = "SliderBar"
 					sliderBar.Image = assets.sliderbar
-					sliderBar.ImageColor3 = Color3.fromRGB(63, 63, 70) 
+					sliderBar.ImageColor3 = Color3.fromRGB(63, 63, 70) -- Zinc-700 (track)
 					sliderBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 					sliderBar.BackgroundTransparency = 1
 					sliderBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -5735,8 +5735,8 @@ function MacLib:Window(Settings)
 		local variants = {
 			default = {
 				bg = Color3.fromRGB(24, 24, 27),       -- zinc-900
-				border = Color3.fromRGB(34, 40, 49),   -- zinc-700
-				accent = Color3.fromRGB(90, 80, 115), -- zinc-500
+				border = Color3.fromRGB(63, 63, 70),   -- zinc-700
+				accent = Color3.fromRGB(34, 40, 49), -- zinc-500
 				title = Color3.fromRGB(250, 250, 250), -- zinc-50
 				desc = Color3.fromRGB(161, 161, 170)   -- zinc-400
 			},
