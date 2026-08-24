@@ -1181,9 +1181,9 @@ function MacLib:Window(Settings)
 
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(50, 46, 65)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(35, 33, 44)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(24, 22, 30))
+        ColorSequenceKeypoint.new(0,        Color3.fromRGB(22, 22, 22)),
+        ColorSequenceKeypoint.new(0.5,      Color3.fromRGB(35, 33, 44)),
+        ColorSequenceKeypoint.new(1,        Color3.fromRGB(24, 22, 30)),
     }
     gradient.Rotation = 135
     gradient.Parent = globalSettings
