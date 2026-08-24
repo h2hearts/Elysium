@@ -10,6 +10,7 @@ local HttpService = game:GetService("HttpService")
 local ContentProvider = game:GetService("ContentProvider")
 local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
+local Lighting = game:GetService("Lighting")
 
 --// Variables
 local isStudio = RunService:IsStudio()
@@ -109,12 +110,24 @@ function MacLib:Window(Settings)
 	notificationsUIPadding.PaddingTop = UDim.new(0, 10)
 	notificationsUIPadding.Parent = notifications
 
+	-- Acrylic Blur Effect for true in-game frosted glass
+	local blurEffect = Lighting:FindFirstChild("Elysium_AcrylicBlur")
+	if not blurEffect then
+		blurEffect = Instance.new("BlurEffect")
+		blurEffect.Name = "Elysium_AcrylicBlur"
+		blurEffect.Size = 20
+		blurEffect.Parent = Lighting
+	else
+		blurEffect.Size = 20
+		blurEffect.Enabled = true
+	end
+
 	local base = Instance.new("Frame")
     base.Name = "Base"
     base.AnchorPoint = Vector2.new(0.5, 0.5)
     base.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
     base.ClipsDescendants = true
-    base.BackgroundTransparency = 0.08
+    base.BackgroundTransparency = 0.32
     base.BorderColor3 = Color3.fromRGB(0, 0, 0)
     base.BorderSizePixel = 0
     base.Position = UDim2.fromScale(0.5, 0.5)
@@ -130,6 +143,29 @@ function MacLib:Window(Settings)
     }
     gradient.Rotation = 135
     gradient.Parent = base
+
+    -- Specular Frosted Glass Top Sheen
+    local glassSheen = Instance.new("Frame")
+    glassSheen.Name = "GlassSheen"
+    glassSheen.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    glassSheen.BackgroundTransparency = 0.93
+    glassSheen.BorderSizePixel = 0
+    glassSheen.Size = UDim2.fromScale(1, 1)
+    glassSheen.ZIndex = 0
+    glassSheen.Parent = base
+
+    local glassSheenCorner = Instance.new("UICorner")
+    glassSheenCorner.CornerRadius = UDim.new(0, 16)
+    glassSheenCorner.Parent = glassSheen
+
+    local glassSheenGradient = Instance.new("UIGradient")
+    glassSheenGradient.Rotation = 90
+    glassSheenGradient.Transparency = NumberSequence.new{
+        NumberSequenceKeypoint.new(0, 0.75),
+        NumberSequenceKeypoint.new(0.35, 0.95),
+        NumberSequenceKeypoint.new(1, 1)
+    }
+    glassSheenGradient.Parent = glassSheen
 
 	local function playBootAnimation()
 		local tweenService = game:GetService("TweenService")
@@ -187,7 +223,7 @@ function MacLib:Window(Settings)
 		)
 		
 		local stage1FadeTween = tweenService:Create(base, stage1FadeTweenInfo, {
-			BackgroundTransparency = 0.08
+			BackgroundTransparency = 0.32
 		})
 		
 		stage1ScaleTween:Play()
@@ -6193,6 +6229,11 @@ function MacLib:Window(Settings)
 	function WindowFunctions:SetState(State, TogglePos)
 		windowState = State
 		base.Visible = State
+		if blurEffect then
+			Tween(blurEffect, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {
+				Size = State and 20 or 0
+			}):Play()
+		end
 	end
 
 	function WindowFunctions:GetState()
@@ -6202,6 +6243,10 @@ function MacLib:Window(Settings)
 	local onUnloadCallback
 
 	function WindowFunctions:Unload()
+		if blurEffect then
+			blurEffect:Destroy()
+			blurEffect = nil
+		end
 		if onUnloadCallback then
 			onUnloadCallback()  
 		end
