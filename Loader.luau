@@ -41,8 +41,14 @@ local function __notify(title: string, text: string): ()
 end
 
 local function __load_script(url: string): boolean
+	local user_key: string = (getgenv and getgenv().ElysiumKey) or ""
+	local target_url: string = url
+	if user_key ~= "" then
+		target_url = target_url .. (url:find("?") and "&" or "?") .. "key=" .. tostring(user_key)
+	end
+
 	local success: boolean, result: any = pcall(function()
-		local script_content: string = game:HttpGet(url)
+		local script_content: string = game:HttpGet(target_url)
 		local loaded_function: any = loadstring(script_content)
 
 		if loaded_function then
