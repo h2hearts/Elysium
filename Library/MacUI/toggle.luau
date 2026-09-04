@@ -36,7 +36,7 @@ local function __create_gui(parent: Instance): ScreenGui
     main_frame.AnchorPoint      = Vector2.new(0, 0.5)
     main_frame.Position         = UDim2.new(0, 5, 0.5, 0)
     main_frame.Size             = UDim2.new(0, 55, 0, 55)
-    main_frame.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Cosmic #23212C
+    main_frame.BackgroundColor3 = Color3.fromRGB(28, 28, 28) -- Cosmic Jet Black
     main_frame.BackgroundTransparency = 0.08
     main_frame.BorderSizePixel  = 0
     main_frame.Active           = true
@@ -47,8 +47,8 @@ local function __create_gui(parent: Instance): ScreenGui
     ui_gradient.Rotation     = 135
     ui_gradient.Color        = ColorSequence.new({
         ColorSequenceKeypoint.new(0,        Color3.fromRGB(22, 22, 22)),
-        ColorSequenceKeypoint.new(0.5,      Color3.fromRGB(35, 33, 44)),
-        ColorSequenceKeypoint.new(1,        Color3.fromRGB(24, 22, 30)),
+        ColorSequenceKeypoint.new(0.5,      Color3.fromRGB(28, 28, 28)),
+        ColorSequenceKeypoint.new(1,        Color3.fromRGB(24, 24, 24)),
     })
 
     --@corner
@@ -57,7 +57,7 @@ local function __create_gui(parent: Instance): ScreenGui
 
     --@stroke
     local ui_stroke          = Instance.new("UIStroke", main_frame)
-    ui_stroke.Color          = Color3.fromRGB(65, 62, 75)
+    ui_stroke.Color          = Color3.fromRGB(50, 50, 50)
     ui_stroke.Thickness      = 1.2
     ui_stroke.Transparency   = 0.65
 
