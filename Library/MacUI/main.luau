@@ -224,9 +224,9 @@ function MacLib:Window(Settings)
     -- Cosmic Frosted Glass Gradient (#23212C)
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0,        Color3.fromRGB(22, 22, 22)),
+        ColorSequenceKeypoint.new(0,        Color3.fromRGB(35, 33, 44)),
         ColorSequenceKeypoint.new(0.5,      Color3.fromRGB(35, 33, 44)),
-        ColorSequenceKeypoint.new(1,        Color3.fromRGB(24, 22, 30)),
+        ColorSequenceKeypoint.new(1,        Color3.fromRGB(35, 33, 44)),
     }
     gradient.Rotation = 135
     gradient.Parent = base
@@ -371,7 +371,7 @@ function MacLib:Window(Settings)
 
 	local sidebar = Instance.new("Frame")
 	sidebar.Name = "Sidebar"
-	sidebar.BackgroundColor3 = Color3.fromRGB(28, 25, 36)
+	sidebar.BackgroundColor3 = Color3.fromRGB(35, 33, 44)
 	sidebar.BackgroundTransparency = 0.4
 	sidebar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	sidebar.BorderSizePixel = 0
@@ -1137,9 +1137,9 @@ function MacLib:Window(Settings)
 
     local gradient = Instance.new("UIGradient")
     gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0,        Color3.fromRGB(22, 22, 22)),
+        ColorSequenceKeypoint.new(0,        Color3.fromRGB(35, 33, 44)),
         ColorSequenceKeypoint.new(0.5,      Color3.fromRGB(35, 33, 44)),
-        ColorSequenceKeypoint.new(1,        Color3.fromRGB(24, 22, 30)),
+        ColorSequenceKeypoint.new(1,        Color3.fromRGB(35, 33, 44)),
     }
     gradient.Rotation = 135
     gradient.Parent = globalSettings
@@ -1147,7 +1147,7 @@ function MacLib:Window(Settings)
 	local globalSettingsUIStroke = Instance.new("UIStroke")
 	globalSettingsUIStroke.Name = "GlobalSettingsUIStroke"
 	globalSettingsUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	globalSettingsUIStroke.Color = Color3.fromRGB(65, 62, 75)
+	globalSettingsUIStroke.Color = Color3.fromRGB(35, 33, 44)
 	globalSettingsUIStroke.Transparency = 0.65
 	globalSettingsUIStroke.Thickness = 1.2
 	globalSettingsUIStroke.Parent = globalSettings
@@ -1775,7 +1775,7 @@ function MacLib:Window(Settings)
 				local section = Instance.new("Frame")
 				section.Name = "Section"
 				section.AutomaticSize = Enum.AutomaticSize.Y
-				section.BackgroundColor3 = Color3.fromRGB(26, 24, 34) -- Frosted Cosmic Glass Card
+				section.BackgroundColor3 = Color3.fromRGB(35, 33, 44) -- Frosted Cosmic Glass Card
 				section.BackgroundTransparency = 0.35
 				section.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				section.BorderSizePixel = 0
@@ -1792,7 +1792,7 @@ function MacLib:Window(Settings)
 				local sectionUIStroke = Instance.new("UIStroke")
 				sectionUIStroke.Name = "SectionUIStroke"
 				sectionUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-				sectionUIStroke.Color = Color3.fromRGB(75, 70, 95)
+				sectionUIStroke.Color = Color3.fromRGB(35, 33, 44)
 				sectionUIStroke.Transparency = 0.65
 				sectionUIStroke.Thickness = 1
 				sectionUIStroke.Parent = section
@@ -1911,7 +1911,7 @@ function MacLib:Window(Settings)
                     
                     -- Add stroke/border
                     local buttonStroke = Instance.new("UIStroke")
-                    buttonStroke.Color = Color3.fromRGB(75, 70, 95)
+                    buttonStroke.Color = Color3.fromRGB(35, 33, 44)
                     buttonStroke.Transparency = 0.6
                     buttonStroke.Thickness = 1
                     buttonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
@@ -1934,7 +1934,7 @@ function MacLib:Window(Settings)
 					local TweenSettings = {
 						DefaultColor = Color3.fromRGB(22, 22, 22),
 						HoverColor = Color3.fromRGB(52, 52, 52),
-						PressColor = Color3.fromRGB(40, 36, 52),
+						PressColor = Color3.fromRGB(35, 33, 44),
 
 						EasingStyle = Enum.EasingStyle.Quint
 					}
@@ -3806,7 +3806,7 @@ function MacLib:Window(Settings)
                     globalSettingsUIStroke.Parent = prompt  -- Letakkan setelah UICorner
                     
                     local gradient = Instance.new("UIGradient")
-                    gradient.Color = ColorSequence.new(Color3.fromRGB(85, 57, 139), Color3.fromRGB(62, 56, 78))
+                    gradient.Color = ColorSequence.new(Color3.fromRGB(35, 33, 44), Color3.fromRGB(35, 33, 44))
                     gradient.Rotation = 90
                     gradient.Parent = prompt
                     
@@ -6057,7 +6057,7 @@ function MacLib:Window(Settings)
 	local globalSettingsUIStroke = Instance.new("UIStroke")
 	globalSettingsUIStroke.Name = "GlobalSettingsUIStroke"
 	globalSettingsUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	globalSettingsUIStroke.Color = Color3.fromRGB(65, 65, 75)
+	globalSettingsUIStroke.Color = Color3.fromRGB(35, 33, 44)
 	globalSettingsUIStroke.Transparency = 0.4
 	globalSettingsUIStroke.Thickness = 1.5
 	globalSettingsUIStroke.Parent = prompt
@@ -6207,7 +6207,7 @@ function MacLib:Window(Settings)
 			button.TextTruncate = Enum.TextTruncate.AtEnd
 			button.AutoButtonColor = false
 			button.AutomaticSize = Enum.AutomaticSize.XY
-			button.BackgroundColor3 = Color3.fromRGB(55, 55, 65)
+			button.BackgroundColor3 = Color3.fromRGB(35, 33, 44)
 			button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			button.BorderSizePixel = 0
 			button.Size = UDim2.fromOffset(0, 0)
@@ -6227,7 +6227,7 @@ function MacLib:Window(Settings)
 			
 			local buttonStroke = Instance.new("UIStroke")
 			buttonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-			buttonStroke.Color = Color3.fromRGB(70, 70, 80)
+			buttonStroke.Color = Color3.fromRGB(35, 33, 44)
 			buttonStroke.Transparency = 0.6
 			buttonStroke.Thickness = 1
 			buttonStroke.Parent = button
@@ -6242,7 +6242,7 @@ function MacLib:Window(Settings)
 		local function ChangeState(State)
 			if State == "Idle" then
 				Tween(button, TweenInfo.new(TweenSettings.Duration, TweenSettings.EasingStyle), {
-					BackgroundColor3 = Color3.fromRGB(55, 55, 65),
+					BackgroundColor3 = Color3.fromRGB(35, 33, 44),
 					TextTransparency = 0.1
 				}):Play()
 				Tween(buttonStroke, TweenInfo.new(TweenSettings.Duration, TweenSettings.EasingStyle), {
@@ -6250,7 +6250,7 @@ function MacLib:Window(Settings)
 				}):Play()
 			elseif State == "Hover" then
 				Tween(button, TweenInfo.new(TweenSettings.Duration, TweenSettings.EasingStyle), {
-					BackgroundColor3 = Color3.fromRGB(65, 65, 75),
+					BackgroundColor3 = Color3.fromRGB(35, 33, 44),
 					TextTransparency = 0
 				}):Play()
 				Tween(buttonStroke, TweenInfo.new(TweenSettings.Duration, TweenSettings.EasingStyle), {
